@@ -1,5 +1,4 @@
 import App from "../App";
-import Home from "../pages/Home";
 import Error from "../pages/Error";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -11,7 +10,6 @@ const routes = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="/Home" element={<Home />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>
