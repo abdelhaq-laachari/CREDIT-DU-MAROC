@@ -89,7 +89,7 @@ const loginClient = asyncHandler(async (req, res) => {
     const isMatch = await bcrypt.compare(password, client.password);
     if (isMatch) {
       res.status(201).json({
-        client,
+        // client,
         Token: generateToken(client._id),
       });
     } else {
@@ -103,7 +103,7 @@ const loginClient = asyncHandler(async (req, res) => {
 });
 
 // @desc    Get a single client
-// @route   GET /admin/singleClient/:id
+// @route   GET /client/singleClient/:id
 // @access  Private
 const singleClient = asyncHandler(async (req, res) => {
   const client = await Client.findById(req.params.id);
@@ -111,7 +111,7 @@ const singleClient = asyncHandler(async (req, res) => {
 });
 
 // @desc    Get all clients
-// @route   GET /admin/clients
+// @route   GET /client/clients
 // @access  Private
 
 const getClients = asyncHandler(async (req, res) => {
@@ -120,7 +120,7 @@ const getClients = asyncHandler(async (req, res) => {
 });
 
 // @desc    Get total clients
-// @route   GET /admin/totalClients
+// @route   GET /client/totalClients
 // @access  Private
 
 const totalClients = asyncHandler(async (req, res) => {

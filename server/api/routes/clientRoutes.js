@@ -2,19 +2,18 @@ const express = require("express"); // Import express
 const router = express.Router(); // Create a router
 
 // Import controllers
-const { registerClient, loginClient } = require("../controller/clientController");
+const { registerClient, loginClient, singleClient } = require("../controller/clientController");
 
 // Import middleware
 const { protectClient } = require("../middleware/clientMiddleware");
 
 // @desc    Register a new client
-// @route   POST /client/register
-// @access  Public
 router.route("/register").post(registerClient);
 
 // @desc    Login a client
-// @route   POST /client/login
-// @access  Public
 router.route("/login").post(loginClient);
+
+// @desc    Get client profile
+router.route("/profile/:id").get(protectClient, singleClient);
 
 module.exports = router;
