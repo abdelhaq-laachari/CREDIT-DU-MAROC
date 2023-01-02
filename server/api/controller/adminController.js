@@ -18,8 +18,8 @@ const registerAdmin = asyncHandler(async (req, res) => {
 
   //   check if the admin already exists
 
-  const userExists = await Admin.findOne({ email });
-  if (userExists) {
+  const adminExists = await Admin.findOne({ email });
+  if (adminExists) {
     res.status(400);
     throw new Error("User already exists");
   }

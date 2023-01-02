@@ -106,8 +106,14 @@ const loginClient = asyncHandler(async (req, res) => {
 // @route   GET /client/singleClient/:id
 // @access  Private
 const singleClient = asyncHandler(async (req, res) => {
-  const client = await Client.findById(req.params.id);
-  res.send(client);
+  const idClient = req.client;
+  const client = await Client.findById(idClient).select("-password");
+  if (client) {
+    res.send(client);
+  } else {
+    res.status(404);
+    throw new Error("Client not found");
+  }
 });
 
 // @desc    Get all clients

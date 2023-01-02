@@ -1,10 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const { getAdmin } = require("../controller/adminController");
+const { getAdmin, registerAdmin, authAdmin } = require("../controller/adminController");
 const { protect } = require("../middleware/authMiddleware");
 
+// @desc    Register a new admin
+router.route("/register").post(registerAdmin);
 
-router.route("/getAdmin").get(protect, getAdmin);
+// @desc    Login a admin
+router.route("/login").post(authAdmin);
+
+// @desc    Get admin profile
+router.route("/profile").get(protect, getAdmin);
+
+
+
 
 // export route file
 module.exports = router;

@@ -14,6 +14,6 @@ router.route("/register").post(registerClient);
 router.route("/login").post(loginClient);
 
 // @desc    Get client profile
-router.route("/profile/:id").get(protectClient, singleClient);
+router.route("/profile").get(protectClient, singleClient);
 
 module.exports = router;
