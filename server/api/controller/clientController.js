@@ -12,10 +12,6 @@ const registerClient = asyncHandler(async (req, res) => {
     firstName,
     lastName,
     age,
-    address,
-    city,
-    zipCode,
-    country,
     phoneNumber,
     email,
     password,
@@ -27,12 +23,8 @@ const registerClient = asyncHandler(async (req, res) => {
     !firstName ||
     !lastName ||
     !age ||
-    !city ||
-    !address ||
     !phoneNumber ||
-    !zipCode ||
     !email ||
-    !country ||
     !password
   ) {
     res.status(400);
@@ -58,11 +50,7 @@ const registerClient = asyncHandler(async (req, res) => {
     email,
     password: hashedPassword,
     age,
-    address,
-    city,
-    zipCode,
     phoneNumber,
-    country,
   });
 
   if (client) {
