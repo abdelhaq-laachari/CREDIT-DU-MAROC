@@ -113,13 +113,24 @@ const getClients = asyncHandler(async (req, res) => {
   res.send(clients);
 });
 
-// @desc    Get total clients
-// @route   GET /client/totalClients
+// @desc    Update a client
+// @route   PUT /client/updateClient
 // @access  Private
 
-const totalClients = asyncHandler(async (req, res) => {
-  const total = await Client.countDocuments();
-  res.status(200).json(total);
+const updateClient = asyncHandler(async (req, res) => {
+  const idClient = req.client;
+  const client = await Client.findById(idClient);
+
+  if (client) {
+    const updatedClient = await Client.findByIdAndUpdate(idClient, req.body, {
+      new: true,
+    });
+    res.send(updatedClient);
+  } else {
+    res.status(404);
+    throw new Error("Client not found");
+  }
+
 });
 
 // @desc Generate token
@@ -134,6 +145,6 @@ module.exports = {
   registerClient,
   loginClient,
   singleClient,
-  getClients,
-  totalClients,
+  getClients, 
+  updateClient,
 };
