@@ -12,6 +12,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "axios";
 
 function Copyright(props) {
   return (
@@ -34,13 +35,69 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  const [formErrors, setFormErrors] = React.useState({});
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const email = data.get("email");
+    const password = data.get("password");
+    const firstName = data.get("firstName");
+    const lastName = data.get("lastName");
+    const phoneNumber = data.get("phone");
+    const age = data.get("age");
+
+    const formData = {
+      email,
+      password,
+      firstName,
+      lastName,
+      phoneNumber,
+      age,
+    };
+
+    setFormErrors(validate(formData));
+
+    if (email && password && firstName && lastName && phoneNumber && age) {
+      try {
+        const res = await axios.post("client/register", formData);
+        localStorage.setItem("accessToken", res.data.Token);
+        // window.location.href = "/";
+      } catch (error) {
+        console.log(error);
+        if (error.response.status === 401) {
+          //   toast.error(error.response.data.message);
+          console.log(error.response.data.message);
+        }
+      }
+    }
+  };
+
+  const validate = (values) => {
+    const errors = {};
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if (!values.email) {
+      errors.email = "Email is required!";
+    } else if (!regex.test(values.email)) {
+      errors.email = "This is not a valid email format!";
+    }
+    if (!values.password) {
+      errors.password = "Password is required";
+    } else if (values.password.length < 4) {
+      errors.password = "Password must be more than 4 characters";
+    }
+    if (!values.firstName) {
+      errors.firstName = "First name is required";
+    }
+    if (!values.lastName) {
+      errors.lastName = "Last name is required";
+    }
+    if (!values.phoneNumber) {
+      errors.phoneNumber = "Phone number is required";
+    }
+    if (!values.age) {
+      errors.age = "Age is required";
+    }
+    return errors;
   };
 
   return (
@@ -73,35 +130,54 @@ export default function SignUp() {
                   autoComplete="given-name"
                   name="firstName"
                   required
+                  error={formErrors.firstName ? true : false}
                   fullWidth
                   id="firstName"
                   label="First Name"
                   autoFocus
                 />
+                {formErrors.firstName && (
+                  <Typography variant="body2" color="error">
+                    {formErrors.firstName}
+                  </Typography>
+                )}
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   required
+                  error={formErrors.lastName ? true : false}
                   fullWidth
                   id="lastName"
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
                 />
+                {formErrors.lastName && (
+                  <Typography variant="body2" color="error">
+                    {formErrors.lastName}
+                  </Typography>
+                )}
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
+                  error={formErrors.email ? true : false}
                   fullWidth
                   id="email"
                   label="Email Address"
                   name="email"
                   autoComplete="email"
                 />
+                {formErrors.email && (
+                  <Typography variant="body2" color="error">
+                    {formErrors.email}
+                  </Typography>
+                )}
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
+                  error={formErrors.password ? true : false}
                   fullWidth
                   name="password"
                   label="Password"
@@ -109,26 +185,43 @@ export default function SignUp() {
                   id="password"
                   autoComplete="new-password"
                 />
+                {formErrors.password && (
+                  <Typography variant="body2" color="error">
+                    {formErrors.password}
+                  </Typography>
+                )}
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   required
+                  error={formErrors.phoneNumber ? true : false}
                   fullWidth
                   name="phone"
                   label="Phone"
                   type="number"
                   id="number"
                 />
+                {formErrors.phoneNumber && (
+                  <Typography variant="body2" color="error">
+                    {formErrors.phoneNumber}
+                  </Typography>
+                )}
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   required
+                  error={formErrors.age ? true : false}
                   fullWidth
                   name="age"
                   label="Age"
                   type="number"
                   id="number"
                 />
+                {formErrors.age && (
+                  <Typography variant="body2" color="error">
+                    {formErrors.age}
+                  </Typography>
+                )}
               </Grid>
             </Grid>
             <Button
@@ -141,7 +234,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/signin" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
