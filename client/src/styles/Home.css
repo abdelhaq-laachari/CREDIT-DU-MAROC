@@ -38,3 +38,18 @@
     1.03
   ); /* Scale the background image up by 10% when the div is hovered over */
 }
+.bank_app{
+    background: url("../assets/img/bank_app.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -10;
+    object-fit: cover;
+}

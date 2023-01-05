@@ -4,7 +4,6 @@ import Bank from "../assets/img/bank.png";
 import World from "../assets/img/world.jpg";
 import Earn from "../assets/img/earn.png";
 import Reward from "../assets/img/Rewards.jpg";
-import BankApp from "../assets/img/bank_app.png";
 import "../styles/Home.css";
 
 const Home = () => {
@@ -74,17 +73,19 @@ const Home = () => {
         </div>
         {/* Third Section end here */}
         {/* another section start here */}
-        <div >
-          <img src="" alt="" />
-          <div>
-            <span>
-              Open an online <br /> checking account <br /> for free today
-            </span>
-            <span>
+        <div className="relative w-[90%] h-[80vh] drop-shadow-xl my-5 bg-emerald-500 rounded-3xl">
+          <div className="bank_app flex flex-col items-center justify-center">
+            <div className="my-3 font-bold flex flex-col items-center text-6xl font-circular text-[#333333]">
+              <span>Open an online </span> <span>checking account </span>{" "}
+              <span> for free today</span>
+            </div>
+            <span className="text-md font-circular">
               No monthly services fees. No minimum balance requirements.
             </span>
+            <button className="bg-[#333333] text-white font-circular font-bold text-lg px-10 py-3 rounded-3xl mt-5">
+              Open an account
+            </button>
           </div>
-          <img src="" alt="" />
         </div>
         {/* another section end here */}
       </div>
