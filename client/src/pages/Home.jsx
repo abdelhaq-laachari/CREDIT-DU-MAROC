@@ -2,6 +2,8 @@ import React from "react";
 import Navbar from "../components/NavBar/NavBar";
 import Bank from "../assets/img/bank.png";
 import World from "../assets/img/world.jpg";
+import Earn from "../assets/img/earn.png";
+import Reward from "../assets/img/Rewards.jpg";
 import "../styles/Home.css";
 
 const Home = () => {
@@ -54,6 +56,22 @@ const Home = () => {
           </div>
         </div>
         {/* cards end here */}
+        {/* Third Section start here */}
+        <div className="w-full flex justify-center space-x-8 my-6 ">
+          <div className="w-2/5 relative flex justify-center overflow-hidden h-[85vh] rounded-3xl drop-shadow-2xl">
+            <img className="Earn" src={Earn} alt="" />
+            <span className="text-4xl font-circular font-bold mt-6">
+              Earn up to 2.5% annual <br /> interest, paid daily
+            </span>
+          </div>
+          <div className="w-2/5 relative flex justify-center overflow-hidden h-[85vh] rounded-3xl drop-shadow-2xl">
+            <img className="Earn" src={Reward} alt="" />
+            <span className="text-4xl font-circular font-bold mt-6 text-white">
+              Get exclusive Rewards <br /> and save as you spend
+            </span>
+          </div>
+        </div>
+        {/* Third Section end here */}
       </div>
     </div>
   );
