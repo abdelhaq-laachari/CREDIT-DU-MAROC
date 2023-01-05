@@ -1,0 +1,18 @@
+.world_image {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -10;
+  object-fit: cover;
+  color: transparent;
+  transition: transform 0.5s ease; 
+}
+.world_image:hover {
+    transform: scale(
+      1.03
+    ); /* Scale the background image up by 10% when the div is hovered over */
+  }
