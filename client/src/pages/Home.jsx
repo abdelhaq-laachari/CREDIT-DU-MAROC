@@ -4,6 +4,7 @@ import Bank from "../assets/img/bank.png";
 import World from "../assets/img/world.jpg";
 import Earn from "../assets/img/earn.png";
 import Reward from "../assets/img/Rewards.jpg";
+import BankApp from "../assets/img/bank_app.png";
 import "../styles/Home.css";
 
 const Home = () => {
@@ -58,13 +59,13 @@ const Home = () => {
         {/* cards end here */}
         {/* Third Section start here */}
         <div className="w-full flex justify-center space-x-8 my-6 ">
-          <div className="w-2/5 relative flex justify-center overflow-hidden h-[85vh] rounded-3xl drop-shadow-2xl">
+          <div className="Card w-2/5 relative flex justify-center overflow-hidden h-[85vh] rounded-3xl drop-shadow-2xl">
             <img className="Earn" src={Earn} alt="" />
             <span className="text-4xl font-circular font-bold mt-6">
               Earn up to 2.5% annual <br /> interest, paid daily
             </span>
           </div>
-          <div className="w-2/5 relative flex justify-center overflow-hidden h-[85vh] rounded-3xl drop-shadow-2xl">
+          <div className="Card w-2/5 relative flex justify-center overflow-hidden h-[85vh] rounded-3xl drop-shadow-2xl">
             <img className="Earn" src={Reward} alt="" />
             <span className="text-4xl font-circular font-bold mt-6 text-white">
               Get exclusive Rewards <br /> and save as you spend
@@ -72,6 +73,20 @@ const Home = () => {
           </div>
         </div>
         {/* Third Section end here */}
+        {/* another section start here */}
+        <div >
+          <img src="" alt="" />
+          <div>
+            <span>
+              Open an online <br /> checking account <br /> for free today
+            </span>
+            <span>
+              No monthly services fees. No minimum balance requirements.
+            </span>
+          </div>
+          <img src="" alt="" />
+        </div>
+        {/* another section end here */}
       </div>
     </div>
   );

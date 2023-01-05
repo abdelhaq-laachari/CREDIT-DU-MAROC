@@ -30,7 +30,10 @@
   color: transparent;
   transition: transform 0.5s ease;
 }
-.Earn:hover {
+.Card {
+  transition: transform 0.5s ease;
+}
+.Card:hover {
   transform: scale(
     1.03
   ); /* Scale the background image up by 10% when the div is hovered over */
