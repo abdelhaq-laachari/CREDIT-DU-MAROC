@@ -16,6 +16,10 @@
   --responsiveTextColor: rgb(0, 0, 0);
 }
 
+.smooth-transition {
+  transition: background-color 0.3s;
+}
+
 header {
   display: flex;
   align-items: center;

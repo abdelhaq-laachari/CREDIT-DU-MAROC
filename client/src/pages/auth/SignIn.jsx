@@ -51,7 +51,6 @@ export default function SignInSide() {
         localStorage.setItem("accessToken", res.data.Token);
         // window.location.href = "/";
       } catch (error) {
-        // console.log(error);
         if (error.response.status === 401) {
           // toast.error(error.response.data.message);
           console.log(error.response.data.message);

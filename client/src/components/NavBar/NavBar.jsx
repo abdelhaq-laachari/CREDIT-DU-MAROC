@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "./styles.css";
 import { Link } from "react-router-dom";
@@ -21,14 +21,42 @@ function Navbar() {
   //     navigate("/");
   //   };
 
+  const [color, setColor] = useState(false);
+  const changeColor = () => {
+    if (window.scrollY <= 150) {
+      setColor(true);
+    } else {
+      setColor(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", changeColor);
+    return () => {
+      window.removeEventListener("scroll", changeColor);
+    };
+  }, []);
+
   const navRef = useRef();
   const showNavbar = () => {
     navRef.current.classList.toggle("responsive_nav");
   };
 
   return (
-    <header className="shadow-lg ">
-      <img src="/assets/logo/supratours.png" alt="" className="logo" />
+    <header
+      className={`smooth-transition
+        ${
+          color
+            ? "shadow-lg sticky top-0 z-50 opacity-75"
+            : "shadow-lg sticky top-0 z-50 bg-white"
+        }
+      `}
+    >
+      <img
+        src="https://seeklogo.com/images/C/credit-du-maroc-logo-80D6D85982-seeklogo.com.png"
+        alt=""
+        className="logo"
+      />
       {/* {user ? (
         <>
           <nav ref={navRef}>
