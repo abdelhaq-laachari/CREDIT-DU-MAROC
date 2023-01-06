@@ -4,6 +4,7 @@ import Bank from "../assets/img/bank.png";
 import World from "../assets/img/world.jpg";
 import Earn from "../assets/img/earn.png";
 import Reward from "../assets/img/Rewards.jpg";
+import Footer from "../components/footer/Footer";
 import "../styles/Home.css";
 
 const Home = () => {
@@ -89,6 +90,7 @@ const Home = () => {
         </div>
         {/* another section end here */}
       </div>
+      <Footer />
     </div>
   );
 };
