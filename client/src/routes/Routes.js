@@ -5,6 +5,7 @@ import App from "../App";
 import Error from "../pages/Error";
 import SignIn from "../pages/auth/SignIn";
 import SignUp from "../pages/auth/SignUp.jsx";
+import Services from "../pages/Services";
 
 const routes = () => {
   return (
@@ -14,6 +15,7 @@ const routes = () => {
           <Route path="/" element={<App />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/service" element={<Services />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>
