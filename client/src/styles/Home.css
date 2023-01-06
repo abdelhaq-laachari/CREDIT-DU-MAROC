@@ -53,3 +53,9 @@
     z-index: -10;
     object-fit: cover;
 }
+
+
+/* responsive css */
+@media (max-width: 768px) {
+
+}

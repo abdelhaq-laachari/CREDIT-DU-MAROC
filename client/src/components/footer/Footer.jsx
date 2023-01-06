@@ -67,7 +67,7 @@ const footer = () => {
         <h1 className=" text-gray-800 font-semibold">
           © 2022-2023 All rights reserved | Build with ❤ by{" "}
           <span className="hover:text-blue-600 font-semibold cursor-pointer">
-            <a href="https://github.com/abdelhaq-laachari" target="_blank" >Godfather</a>
+            <a href="https://github.com/abdelhaq-laachari" target="_blank" rel="noreferrer" >Godfather</a>
           </span>
         </h1>
       </div>
