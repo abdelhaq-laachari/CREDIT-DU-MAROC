@@ -3,7 +3,6 @@ import Navbar from "../components/NavBar/NavBar";
 import Footer from "../components/footer/Footer";
 import "../styles/Services.css";
 import Map from "../assets/img/map.jpg";
-import Map_r from "../assets/img/rmap.jpg";
 import Cur from "../assets/img/cur.svg";
 import Send from "../assets/img/send.svg";
 import Send2 from "../assets/img/send2.png";

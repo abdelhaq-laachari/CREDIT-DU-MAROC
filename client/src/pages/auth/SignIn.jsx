@@ -48,7 +48,7 @@ export default function SignInSide() {
       try {
         const res = await axios.post("client/login", formData);
         console.log(res.data);
-        localStorage.setItem("accessToken", res.data.Token);
+        localStorage.setItem("user", res.data.Token);
         // window.location.href = "/";
       } catch (error) {
         if (error.response.status === 401) {

@@ -10,7 +10,12 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import axios from "axios";
+// import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { register, reset } from "../../features/auth/authSlice";
+import Spinner from "../../components/Spinner/Spinner";
 
 function Copyright(props) {
   return (
@@ -34,6 +39,28 @@ const theme = createTheme();
 
 export default function SignUp() {
   const [formErrors, setFormErrors] = React.useState({});
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  React.useEffect(() => {
+    // check for error and show toast alert
+    if (isError) {
+      toast.error(message);
+    }
+    // if user logged in redirect him to home
+    if (isSuccess) {
+      navigate("/");
+      // toast.success("register success");
+    }
+    // we need to reset everything
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -55,19 +82,21 @@ export default function SignUp() {
 
     setFormErrors(validate(formData));
 
-    if (email && password && firstName && lastName && phoneNumber && age) {
-      try {
-        const res = await axios.post("client/register", formData);
-        localStorage.setItem("accessToken", res.data.Token);
-        // window.location.href = "/";
-      } catch (error) {
-        console.log(error);
-        if (error.response.status === 401) {
-          //   toast.error(error.response.data.message);
-          console.log(error.response.data.message);
-        }
-      }
-    }
+    // if (email && password && firstName && lastName && phoneNumber && age) {
+    //   try {
+    //     const res = await axios.post("client/register", formData);
+    //     localStorage.setItem("user", res.data.Token);
+    //     // window.location.href = "/";
+    //   } catch (error) {
+    //     console.log(error);
+    //     if (error.response.status === 401) {
+    //       //   toast.error(error.response.data.message);
+    //       console.log(error.response.data.message);
+    //     }
+    //   }
+    // }
+
+    dispatch(register(formData));
   };
 
   const validate = (values) => {
@@ -97,6 +126,10 @@ export default function SignUp() {
     }
     return errors;
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <ThemeProvider theme={theme}>
