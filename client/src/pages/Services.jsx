@@ -73,7 +73,7 @@ const Services = () => {
           <div className="w-11/12 lg:w-4/12 order-2">
             <img src={Cur} alt="" />
           </div>
-          <div className="w-11/12 lg:w-6/12 h-full flex flex-col justify-center space-y-6">
+          <div className="lg:order-2 w-11/12 lg:w-6/12 h-full flex flex-col justify-center space-y-6">
             <span className="text-3xl lg:text-5xl font-bold font-circular">
               Request money in any combo of currencies
             </span>

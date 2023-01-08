@@ -149,7 +149,7 @@ function Navbar() {
             </Link>
           </span>
           <span>
-            <Link to="/About" element={<About />}>
+            <Link to="/about" element={<About />}>
               About Us
             </Link>
           </span>
