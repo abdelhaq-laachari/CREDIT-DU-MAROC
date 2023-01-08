@@ -8,25 +8,11 @@ const jwt = require("jsonwebtoken");
 // @access  Public
 
 const registerClient = asyncHandler(async (req, res) => {
-  const {
-    firstName,
-    lastName,
-    age,
-    phoneNumber,
-    email,
-    password,
-  } = req.body;
+  const { firstName, lastName, age, phoneNumber, email, password } = req.body;
 
   //   check if any of the fields are empty
 
-  if (
-    !firstName ||
-    !lastName ||
-    !age ||
-    !phoneNumber ||
-    !email ||
-    !password
-  ) {
+  if (!firstName || !lastName || !age || !phoneNumber || !email || !password) {
     res.status(400);
     throw new Error("Please fill in all fields");
   }
@@ -69,6 +55,13 @@ const registerClient = asyncHandler(async (req, res) => {
 
 const loginClient = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
+
+  //   check if any of the fields are empty
+
+  if (!email || !password) {
+    res.status(400);
+    throw new Error("Please fill in all fields");
+  }
 
   // check for client email
   const client = await Client.findOne({ email });
@@ -130,7 +123,6 @@ const updateClient = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("Client not found");
   }
-
 });
 
 // @desc Generate token
@@ -145,6 +137,6 @@ module.exports = {
   registerClient,
   loginClient,
   singleClient,
-  getClients, 
+  getClients,
   updateClient,
 };

@@ -10,7 +10,11 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import axios from "axios";
+import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { logIn, reset } from "../../features/auth/authSlice";
+import Spinner from "../../components/Spinner/Spinner";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -34,6 +38,14 @@ const theme = createTheme();
 
 export default function SignInSide() {
   const [formErrors, setFormErrors] = React.useState({});
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -44,20 +56,21 @@ export default function SignInSide() {
       password,
     };
     setFormErrors(validate(formData));
-    if (email && password) {
-      try {
-        const res = await axios.post("client/login", formData);
-        console.log(res.data);
-        localStorage.setItem("user", res.data.Token);
-        // window.location.href = "/";
-      } catch (error) {
-        if (error.response.status === 401) {
-          // toast.error(error.response.data.message);
-          console.log(error.response.data.message);
-        }
-      }
-    }
+    dispatch(logIn(formData));
   };
+
+  React.useEffect(() => {
+    // check for error and show toast alert
+    if (isError) {
+      toast.error(message);
+    }
+    // if user logged in redirect him to home
+    if (isSuccess) {
+      navigate("/");
+    }
+    // we need to reset everything
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const validate = (values) => {
     const errors = {};
@@ -74,6 +87,10 @@ export default function SignInSide() {
     }
     return errors;
   };
+
+  if (isLoading) {
+    return <Spinner />;     
+  }
 
   return (
     <ThemeProvider theme={theme}>

@@ -55,7 +55,6 @@ export default function SignUp() {
     // if user logged in redirect him to home
     if (isSuccess) {
       navigate("/");
-      // toast.success("register success");
     }
     // we need to reset everything
     dispatch(reset());
@@ -81,20 +80,6 @@ export default function SignUp() {
     };
 
     setFormErrors(validate(formData));
-
-    // if (email && password && firstName && lastName && phoneNumber && age) {
-    //   try {
-    //     const res = await axios.post("client/register", formData);
-    //     localStorage.setItem("user", res.data.Token);
-    //     // window.location.href = "/";
-    //   } catch (error) {
-    //     console.log(error);
-    //     if (error.response.status === 401) {
-    //       //   toast.error(error.response.data.message);
-    //       console.log(error.response.data.message);
-    //     }
-    //   }
-    // }
 
     dispatch(register(formData));
   };
