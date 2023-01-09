@@ -3,9 +3,9 @@ import Mcrd from "../../assets/img/mcrd.svg";
 
 const MasterCard = () => {
   return (
-    <body class=" text-gray-600">
-      <div class="mx-auto flex justify-center">
-        <div class="flex flex-col w-full max-w-xl">
+    <body class="text-gray-600">
+      <div class="mx-auto">
+        <div class="w-full max-w-xl">
           <div class="bg-gradient-to-tl from-gray-900 to-gray-800 text-white h-56 w-96 p-6 rounded-xl shadow-md">
             <div class="h-full flex flex-col justify-between">
               <div class="flex items-start justify-between space-x-4">
