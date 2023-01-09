@@ -1,17 +1,21 @@
 import React from "react";
+import MasterCard from "../../components/Credit card/MasterCard";
 import Sidebar from "../../components/Side bar/Sidebar";
+import Nav from "../../components/Top nav/Nav";
+import Widget from "../../components/widget/Widget";
 
 const Home = () => {
   return (
-    <div className="bg-blacks flex">
+    <div className="flex w-full">
       <Sidebar />
-      <div>
-        <p className="text-lg h-screen">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam
-          excepturi soluta quos iure optio veritatis a repellat, hic provident
-          dolorum facilis. Sunt tenetur similique maxime molestias quo! Cum,
-          aliquid consequatur!
-        </p>
+      <div className="flex w-full flex-col ">
+        <Nav />
+        <div className="w-[45%] flex items-start justify-end bg-slate-300">
+          <div className="flex flex-col w-full p-2 justify-between">
+            <span>May Cards</span>
+            <MasterCard/> 
+          </div>
+        </div>
       </div>
     </div>
   );

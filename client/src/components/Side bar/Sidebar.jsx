@@ -11,7 +11,7 @@ const App = () => {
   const [open, setOpen] = useState(true);
 
   return (
-    <div className="flex">
+    <div className="flex bg-[#F3F4F6] drop-shadow-lg">
       <div
         className={` ${
           open ? "w-64" : "w-20 "
