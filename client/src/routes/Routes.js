@@ -8,6 +8,8 @@ import SignUp from "../pages/auth/SignUp.jsx";
 import Services from "../pages/Services";
 import About from "../pages/About";
 import Home from "../pages/dashboard/Home";
+import Transaction from "../pages/dashboard/Transaction";
+import Profile from "../pages/dashboard/Profile";
 
 const routes = () => {
   return (
@@ -21,8 +23,9 @@ const routes = () => {
           <Route path="/about" element={<About />} />
           <Route path="/dashboard">
             <Route index element={<Home />} />
-            {/* <Route path="single" element={<User />} />
-            <Route
+            <Route path="transaction" element={<Transaction />} />
+            <Route path="profile" element={<Profile />} />
+            {/* <Route
               path="new"
               element={<New inputs={userInputs} title="Add New User" />}
             /> */}

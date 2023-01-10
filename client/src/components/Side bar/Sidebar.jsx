@@ -28,7 +28,8 @@ const App = () => {
           <img
             src="https://seeklogo.com/images/C/credit-du-maroc-logo-80D6D85982-seeklogo.com.png"
             alt="logo"
-            className="cursor-pointer duration-500 w-12"/>
+            className="cursor-pointer duration-500 w-12"
+          />
           <h1
             className={`origin-left font-medium text-xl duration-200 ${
               !open && "hidden"
@@ -38,15 +39,7 @@ const App = () => {
           </h1>
         </div>
         <ul className="pt-9">
-          <Link to="/search">
-            <li className="flex mb-2 rounded-md p-2 cursor-pointer hover:bg-gray-600 hover:text-white transition-colors text-md items-center gap-x-4">
-              <AiOutlineTransaction />
-              <span className={`${!open && "hidden"} origin-left duration-200`}>
-                Transaction
-              </span>
-            </li>
-          </Link>
-          <Link to="/search">
+          <Link to="/dashboard">
             <li className="flex mb-2 rounded-md p-2 cursor-pointer hover:bg-gray-600 hover:text-white transition-colors text-md items-center gap-x-4">
               <AiFillCreditCard />
               <span className={`${!open && "hidden"} origin-left duration-200`}>
@@ -54,7 +47,15 @@ const App = () => {
               </span>
             </li>
           </Link>
-          <Link to="/search">
+          <Link to="/dashboard/transaction">
+            <li className="flex mb-2 rounded-md p-2 cursor-pointer hover:bg-gray-600 hover:text-white transition-colors text-md items-center gap-x-4">
+              <AiOutlineTransaction />
+              <span className={`${!open && "hidden"} origin-left duration-200`}>
+                Transaction
+              </span>
+            </li>
+          </Link>
+          <Link to="/dashboard/payments">
             <li className="flex mb-2 rounded-md p-2 cursor-pointer hover:bg-gray-600 hover:text-white transition-colors text-md items-center gap-x-4">
               <MdOutlinePayments />
               <span className={`${!open && "hidden"} origin-left duration-200`}>
@@ -62,7 +63,7 @@ const App = () => {
               </span>
             </li>
           </Link>
-          <Link to="/search">
+          <Link to="/dashboard/profile">
             <li className="flex mb-2 rounded-md p-2 cursor-pointer hover:bg-gray-600 hover:text-white transition-colors text-md items-center gap-x-4">
               <FaUserCircle />
               <span className={`${!open && "hidden"} origin-left duration-200`}>
