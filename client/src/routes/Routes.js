@@ -10,6 +10,7 @@ import About from "../pages/About";
 import Home from "../pages/dashboard/Home";
 import Transaction from "../pages/dashboard/Transaction";
 import Profile from "../pages/dashboard/Profile";
+import Payment from "../pages/dashboard/Payment";
 
 const routes = () => {
   return (
@@ -24,11 +25,8 @@ const routes = () => {
           <Route path="/dashboard">
             <Route index element={<Home />} />
             <Route path="transaction" element={<Transaction />} />
+            <Route path="payments" element={<Payment />} />
             <Route path="profile" element={<Profile />} />
-            {/* <Route
-              path="new"
-              element={<New inputs={userInputs} title="Add New User" />}
-            /> */}
           </Route>
           <Route path="*" element={<Error />} />
         </Routes>

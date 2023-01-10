@@ -1,22 +1,21 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import transactionService from "./transactionService";
-import { config } from "../../getToken";
+import paymentService from "./paymentService";
 
 // initial state
 const initialState = {
-  transactions: [],
+  payments: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
   message: "",
 };
 
-// Get all transactions
-export const getTransactions = createAsyncThunk(
-  "client/transactions",
+// Get all payments
+export const getPayments = createAsyncThunk(
+  "client/payments",
   async (_, thunkAPI) => {
     try {
-      return await transactionService.allTransactions();
+      return await paymentService.allPayments();
     } catch (error) {
       const message =
         (error.response &&
@@ -30,26 +29,23 @@ export const getTransactions = createAsyncThunk(
 );
 
 // Slice
-export const transactionSlice = createSlice({
-  name: "transactions",
+export const paymentSlice = createSlice({
+  name: "Payments",
   initialState,
   reducers: {
     reset: (state) => initialState,
-    // resetSuccess: (state) => {
-    //   state.isSuccess = false;
-    // },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getTransactions.pending, (state) => {
+      .addCase(getPayments.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getTransactions.fulfilled, (state, action) => {
+      .addCase(getPayments.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.transactions = action.payload;
+        state.payments = action.payload;
       })
-      .addCase(getTransactions.rejected, (state, action) => {
+      .addCase(getPayments.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
@@ -57,5 +53,5 @@ export const transactionSlice = createSlice({
   },
 });
 
-export const { reset } = transactionSlice.actions;
-export default transactionSlice.reducer;
+export const { reset } = paymentSlice.actions;
+export default paymentSlice.reducer;

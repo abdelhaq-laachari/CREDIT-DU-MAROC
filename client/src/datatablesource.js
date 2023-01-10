@@ -1,7 +1,7 @@
 export const userColumns = [
   { field: "_id", headerName: "ID", width: 70 },
   {
-    field: "user",
+    field: "client",
     headerName: "User",
     width: 230,
     renderCell: (params) => {
@@ -49,41 +49,67 @@ export const userColumns = [
   },
 ];
 
-export const carColumns = [
-  { field: "_id", headerName: "ID", width: 130 },
+export const transactionsColumns = [
+  { field: "_id", headerName: "ID", width: 170 },
   {
-    field: "name",
-    headerName: "Name",
-    width: 120,
-  },
-  {
-    field: "edition",
-    headerName: "Edition",
-    width: 120,
-  },
-  {
-    field: "horsepower",
-    headerName: "Horse Power",
-    width: 135,
+    field: "amount",
+    headerName: "Amount",
+    width: 170,
     renderCell: (params) => {
-      return <div className="cellWithImg">{params.row.horsepower} hp</div>;
+      return (
+        <div className="font-semibold text-md">
+          {params.row.amount} <span className="font-semibold">USD</span>
+        </div>
+      );
     },
   },
   {
-    field: "maxSpeed",
-    headerName: "Max Speed",
-    width: 135,
+    field: "date",
+    headerName: "Date",
+    width: 170,
+  },
+  {
+    field: "description",
+    headerName: "Description",
+    width: 270,
+  },
+];
+
+export const paymentColumns = [
+  { field: "_id", headerName: "ID", width: 170 },
+  {
+    field: "amount",
+    headerName: "Amount",
+    width: 170,
     renderCell: (params) => {
-      return <div className="cellWithImg">{params.row.maxSpeed} km/h</div>;
+      return (
+        <div className="font-semibold text-md">
+          {params.row.amount} <span className="font-semibold">USD</span>
+        </div>
+      );
     },
   },
   {
-    field: "acceleration",
-    headerName: "Acceleration",
-    width: 135,
+    field: "date",
+    headerName: "Date",
+    width: 170,
+  },
+  {
+    field: "description",
+    headerName: "Description",
+    width: 270,
+  },
+  {
+    field: "payee",
+    headerName: "Payee",
+    width: 170,
     renderCell: (params) => {
-      return <div className="cellWithImg">{params.row.acceleration} s</div>;
-    },
+      return (
+        <div className="font-semibold text-md">
+          {params.row.payee}
+        </div>
+      );
+    }
   },
 ];
 

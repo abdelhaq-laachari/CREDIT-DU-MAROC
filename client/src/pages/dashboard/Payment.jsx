@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Datatable from "../../components/datatable/Datatable";
 import Sidebar from "../../components/Side bar/Sidebar";
 import Nav from "../../components/Top nav/Nav";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import {
-  getTransactions,
-  reset,
-} from "../../features/transaction/transactionSlice";
+import {reset, getPayments} from "../../features/payment/paymentSlice";
 import Spinner from "../../components/Spinner/Spinner";
 
 const Transaction = () => {
@@ -17,8 +14,8 @@ const Transaction = () => {
   const dispatch = useDispatch()
 
   const { user } = useSelector((state) => state.auth)
-  const { transactions, isLoading, isError, message } = useSelector(
-    (state) => state.transaction
+  const { payments, isLoading, isError, message } = useSelector(
+    (state) => state.payment
   )
 
   useEffect(() => {
@@ -30,7 +27,7 @@ const Transaction = () => {
       navigate('/signin')
     }
 
-    dispatch(getTransactions())
+    dispatch(getPayments())
 
     return () => {
       dispatch(reset())
@@ -45,7 +42,7 @@ const Transaction = () => {
       <Sidebar />
       <div className="flex w-full flex-col ">
         <Nav />
-        <Datatable data={transactions} title="All Transactions" />
+        <Datatable data={payments} title="All Transactions" />
       </div>
     </div>
   );

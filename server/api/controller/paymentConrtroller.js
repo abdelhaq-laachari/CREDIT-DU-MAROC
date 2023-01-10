@@ -32,6 +32,17 @@ const send = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Get all payments
+// @route   GET /client/payment
+// @access  Private
+
+const payments = asyncHandler(async (req, res) => {
+  const clientId = req.client;
+  const payments = await Payment.find({ client : clientId });
+  res.json(payments);
+})
+
 module.exports = {
   send,
+  payments,
 };

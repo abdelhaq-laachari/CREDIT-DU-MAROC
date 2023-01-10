@@ -1,24 +1,22 @@
 import "./datatable.css";
 import { DataGrid } from "@mui/x-data-grid";
-import { carColumns, userColumns, orderColumns } from "../../datatablesource";
+import { transactionsColumns, paymentColumns } from "../../datatablesource";
 import { Link } from "react-router-dom";
 
 const Datatable = ({ data, title }) => {
-  // const path = window.location.pathname.split("/")[1];
-  
+  const path = window.location.pathname.split("/")[2];
+  console.log(path);
 
-  // // add switch statement to handle different paths
-  // const switchFunction = () => {
-  //   switch (path) {
-  //     case "users":
-  //       return userColumns.concat(userAction);
-  //     case "cars":
-  //       return carColumns.concat(carAction);
-  //     case "orders":
-  //       return orderColumns.concat(orderAction);
-  //     default:
-  //   }
-  // };
+  // add switch statement to handle different paths
+  const switchFunction = () => {
+    switch (path) {
+      case "transaction":
+        return transactionsColumns.concat();
+      case "payments":
+        return paymentColumns.concat();
+      default:
+    }
+  };
 
   return (
     <div className="datatable">
@@ -29,7 +27,7 @@ const Datatable = ({ data, title }) => {
         className="datagrid"
         getRowId={(row) => row._id}
         rows={data}
-        columns={carColumns}
+        columns={switchFunction()}
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection

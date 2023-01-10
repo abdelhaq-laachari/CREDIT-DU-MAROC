@@ -5,6 +5,9 @@ import Sidebar from "../../components/Side bar/Sidebar";
 import Nav from "../../components/Top nav/Nav";
 
 const Home = () => {
+  
+
+
   return (
     <div className="flex w-full">
       <Sidebar />
