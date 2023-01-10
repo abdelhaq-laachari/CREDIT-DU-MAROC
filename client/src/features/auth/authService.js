@@ -13,7 +13,7 @@ const register = async (userData) => {
 const logIn = async (userData) => {
   const response = await axios.post("client/login", userData);
   if (response.data) {
-    localStorage.setItem("user", JSON.stringify(response.data.Token));
+    localStorage.setItem("user", response.data.Token);
   }
   return response.data;
 };
