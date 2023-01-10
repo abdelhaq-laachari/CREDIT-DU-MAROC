@@ -3,6 +3,7 @@ const router = express.Router(); // Create a router
 
 // Import controllers
 const { registerClient, loginClient, singleClient, updateClient } = require("../controller/clientController");
+const { send } = require("../controller/paymentConrtroller");
 const { getTransactions, deposit, withdraw } = require("../controller/transactionController");
 
 // Import middleware
@@ -28,5 +29,8 @@ router.route("/deposit").post(protectClient, deposit);
 
 // @desc  make a withdrawal
 router.route("/withdraw").post(protectClient, withdraw);
+
+// @desc  Make payment
+router.route("/payment").post(protectClient, send);
 
 module.exports = router;

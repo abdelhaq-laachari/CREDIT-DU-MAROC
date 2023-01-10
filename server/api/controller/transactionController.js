@@ -1,5 +1,6 @@
 const Transaction = require("../models/transactionModel");
 const Balance = require("../models/balanceModel");
+const Payment = require("../models/paymentModel")
 const asyncHandler = require("express-async-handler");
 
 // @desc    Get all transactions
@@ -63,6 +64,7 @@ const withdraw = asyncHandler(async (req, res) => {
     });
   }
 });
+
 
 // export
 module.exports = {
