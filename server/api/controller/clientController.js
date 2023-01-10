@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Client = require("../models/clientModel");
+const Balance = require("../models/balanceModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -40,6 +41,10 @@ const registerClient = asyncHandler(async (req, res) => {
   });
 
   if (client) {
+    const balance = await Balance.create({
+      client: client._id,
+      balance: 0,
+    });
     res.status(201).json({
       Token: generateToken(client._id),
     });
