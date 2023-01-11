@@ -86,7 +86,7 @@ const Transaction = () => {
         <span className="p-6 h-20 flex items-center text-3xl font-semibold w-full bg-[#F8F8F8]">
           Deposit money
         </span>
-        <div className="flex items-center space-x-8 w-full py-6 px-8 ">
+        <div className="flex lg:flex-row flex-col items-center space-x-8 w-full py-6 px-8 ">
           <div className="flex flex-col space-y-4">
             <span className="text-xl font-semibold ">My Cards</span>
             <MasterCard />

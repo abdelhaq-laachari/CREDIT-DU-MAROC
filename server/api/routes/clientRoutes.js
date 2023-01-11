@@ -1,4 +1,5 @@
 const express = require("express"); // Import express
+const { getBalance } = require("../controller/cardController");
 const router = express.Router(); // Create a router
 
 // Import controllers
@@ -35,5 +36,8 @@ router.route("/payments").get(protectClient, payments);
 
 // @desc  Make payment
 router.route("/makePayment").post(protectClient, send);
+
+// @desc Get Balance
+router.route("/card").get(protectClient, getBalance);
 
 module.exports = router;

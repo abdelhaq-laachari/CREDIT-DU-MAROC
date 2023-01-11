@@ -14,6 +14,7 @@
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
+    "creditcard-generator": "^0.0.7",
     "dotenv": "^16.0.3",
     "emailsender-js": "^0.1.3",
     "express": "^4.18.2",

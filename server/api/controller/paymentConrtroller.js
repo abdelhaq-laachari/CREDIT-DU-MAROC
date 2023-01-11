@@ -1,5 +1,5 @@
 const Payment = require("../models/paymentModel");
-const Balance = require("../models/balanceModel");
+const Card = require("../models/cardModel");
 const asyncHandler = require("express-async-handler");
 
 // @desc    Send money
@@ -17,7 +17,7 @@ const send = asyncHandler(async (req, res) => {
     payee,
   });
   const createdPayment = await payment.save();
-  const balance = await Balance.findOne({ client: clientId });
+  const balance = await Card.findOne({ client: clientId });
   if (balance.balance < amount) {
     res.status(400).json({
       message: `You have insufficient funds to send ${amount}. Your current account balance is ${balance.balance}. Please deposit more funds to your account.`,

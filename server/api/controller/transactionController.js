@@ -1,6 +1,5 @@
 const Transaction = require("../models/transactionModel");
-const Balance = require("../models/balanceModel");
-const Payment = require("../models/paymentModel");
+const Card = require("../models/cardModel");
 const asyncHandler = require("express-async-handler");
 
 // @desc    Get all transactions
@@ -30,7 +29,7 @@ const deposit = asyncHandler(async (req, res) => {
     description,
   });
   const createdTransaction = await transaction.save();
-  const balance = await Balance.findOne({ client: clientId });
+  const balance = await Card.findOne({ client: clientId });
   const newBalance = balance.balance + amount;
   balance.balance = newBalance;
   await balance.save();
@@ -53,7 +52,7 @@ const withdraw = asyncHandler(async (req, res) => {
     description,
   });
   const createdTransaction = await transaction.save();
-  const balance = await Balance.findOne({ client: clientId });
+  const balance = await Card.findOne({ client: clientId });
   if (balance.balance < amount) {
     res.status(400).json({
       message: `You have insufficient funds to withdraw ${amount}. Your current account balance is ${balance.balance}. Please deposit more funds to your account.`,

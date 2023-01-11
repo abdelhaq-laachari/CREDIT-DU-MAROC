@@ -1,8 +1,9 @@
 const asyncHandler = require("express-async-handler");
 const Client = require("../models/clientModel");
-const Balance = require("../models/balanceModel");
+const Card = require("../models/cardModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const generator = require("creditcard-generator");
 
 // @desc    Register a new client
 // @route   POST /client/register
@@ -41,9 +42,11 @@ const registerClient = asyncHandler(async (req, res) => {
   });
 
   if (client) {
-    const balance = await Balance.create({
+    const balance = await Card.create({
       client: client._id,
       balance: 0,
+      currency: "MAD",
+      cardNumber: generator.GenCC().toString(),
     });
     res.status(201).json({
       Token: generateToken(client._id),
@@ -60,6 +63,7 @@ const registerClient = asyncHandler(async (req, res) => {
 
 const loginClient = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
+  // const test = generator.GenCC();
 
   //   check if any of the fields are empty
 
