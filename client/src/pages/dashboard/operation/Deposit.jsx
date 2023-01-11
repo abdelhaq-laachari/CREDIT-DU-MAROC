@@ -20,7 +20,7 @@ const Transaction = () => {
     (state) => state.transaction
   );
 
-  const date = new Date();
+  const myDate = new Date();
   const newDate = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "2-digit",
@@ -28,22 +28,26 @@ const Transaction = () => {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
-  }).format(date);
-  // console.log(newDate);
+  }).format(myDate);
 
-  const [form, setForm] = useState({
-    amount: "",
-    description: "",
-    date: newDate,
-    // client: user._id,
-  });
 
-  // console.log(form);
+  const [amount, setAmount] = useState();
+  const [description, setDescription] = useState("");
+  const [date, setDate] = useState(newDate);
 
-  const { amount, description } = form;
+  const form = {
+    amount,
+    description,
+    date,
+  };
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+
+  const getDescription = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const getAmount = (e) => {
+    setAmount(parseFloat(e.target.value));
   };
 
   const paymentFunction = (e) => {
@@ -79,10 +83,17 @@ const Transaction = () => {
       <Sidebar />
       <div className="flex w-full flex-col ">
         <Nav />
-        <div className="flex items-center space-x-8 w-full py-6 px-8 bg-red-50">
-          <div className="space-y-6">
-            <span className="text-xl font-semibold mb-3">May Cards</span>
+        <span className="p-6 h-20 flex items-center text-3xl font-semibold w-full bg-[#F8F8F8]">
+          Deposit money
+        </span>
+        <div className="flex items-center space-x-8 w-full py-6 px-8 ">
+          <div className="flex flex-col space-y-4">
+            <span className="text-xl font-semibold ">My Cards</span>
             <MasterCard />
+            <div className="flex justify-between">
+              <span className="text-xl font-semibold ">My Balance</span>
+              <span className="text-xl font-semibold w-1/3">1000 $</span>
+            </div>
           </div>
           <div className="w-full">
             <form onSubmit={paymentFunction}>
@@ -100,7 +111,7 @@ const Transaction = () => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="1345 $"
                   required
-                  onChange={handleChange}
+                  onChange={getAmount}
                 />
               </div>
               <div className="mb-6">
@@ -117,7 +128,7 @@ const Transaction = () => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Deposit"
                   required
-                  onChange={handleChange}
+                  onChange={getDescription}
                 />
               </div>
               <button

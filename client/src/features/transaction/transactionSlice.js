@@ -47,6 +47,26 @@ export const makeDeposit = createAsyncThunk(
   }
 );
 
+// Make withdrawal 
+export const makeWithdrawal = createAsyncThunk(
+  "client/withdraw",
+  async (data, thunkAPI) => {
+    try {
+      return await transactionService.withdrawMoney(data);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+)
+
+
+
 // Slice
 export const transactionSlice = createSlice({
   name: "transaction",
@@ -83,6 +103,19 @@ export const transactionSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(makeDeposit.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(makeWithdrawal.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(makeWithdrawal.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message = action.payload.message;
+      })
+      .addCase(makeWithdrawal.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

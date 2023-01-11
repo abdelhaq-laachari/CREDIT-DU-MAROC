@@ -22,22 +22,21 @@ const deposit = asyncHandler(async (req, res) => {
   const { amount, date, description } = req.body;
   if (!amount || !date || !description) {
     res.status(400).json({ message: "Please fill in all fields" });
-  } else {
-    const transaction = new Transaction({
-      client: clientId,
-      amount,
-      date,
-      description,
-    });
-    const createdTransaction = await transaction.save();
-    const balance = await Balance.findOne({ client: clientId });
-    const newBalance = balance.balance + amount;
-    balance.balance = newBalance;
-    await balance.save();
-    res.status(201).json({
-      message: `Thank you for your deposit of ${amount}. Your current account balance is ${newBalance}. Please keep your transaction receipt for your records.`,
-    });
   }
+  const transaction = new Transaction({
+    client: clientId,
+    amount,
+    date,
+    description,
+  });
+  const createdTransaction = await transaction.save();
+  const balance = await Balance.findOne({ client: clientId });
+  const newBalance = balance.balance + amount;
+  balance.balance = newBalance;
+  await balance.save();
+  res.status(201).json({
+    message: `Thank you for your deposit of ${amount}. Your current account balance is ${newBalance}. Please keep your transaction receipt for your records.`,
+  });
 });
 
 // @desc    Withdraw money
