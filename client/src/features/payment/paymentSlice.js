@@ -28,6 +28,24 @@ export const getPayments = createAsyncThunk(
   }
 );
 
+// Make payment
+export const makePayment = createAsyncThunk(
+  "client/payment",
+  async (data, thunkAPI) => {
+    try {
+      return await paymentService.sendMoney(data);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+)
+
 // Slice
 export const paymentSlice = createSlice({
   name: "Payments",
@@ -49,7 +67,20 @@ export const paymentSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-      });
+      })
+      .addCase(makePayment.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(makePayment.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message = action.payload;
+      })
+      .addCase(makePayment.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
   },
 });
 

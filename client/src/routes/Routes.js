@@ -11,6 +11,11 @@ import Home from "../pages/dashboard/Home";
 import Transaction from "../pages/dashboard/Transaction";
 import Profile from "../pages/dashboard/Profile";
 import Payment from "../pages/dashboard/Payment";
+import Deposit from "../pages/dashboard/operation/Deposit";
+import Withdraw from "../pages/dashboard/operation/Withdraw";
+import Send from "../pages/dashboard/operation/Send";
+
+
 
 const routes = () => {
   return (
@@ -27,6 +32,9 @@ const routes = () => {
             <Route path="transaction" element={<Transaction />} />
             <Route path="payments" element={<Payment />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="deposit" element={<Deposit />} />
+            <Route path="withdraw" element={<Withdraw />} />
+            <Route path="send" element={<Send />} />
           </Route>
           <Route path="*" element={<Error />} />
         </Routes>

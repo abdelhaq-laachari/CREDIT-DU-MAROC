@@ -29,15 +29,35 @@ export const getTransactions = createAsyncThunk(
   }
 );
 
+// Make deposit
+export const makeDeposit = createAsyncThunk(
+  "client/deposit",
+  async (data, thunkAPI) => {
+    try {
+      return await transactionService.depositMoney(data);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Slice
 export const transactionSlice = createSlice({
-  name: "transactions",
+  name: "transaction",
   initialState,
   reducers: {
-    reset: (state) => initialState,
-    // resetSuccess: (state) => {
-    //   state.isSuccess = false;
-    // },
+    reset: (state) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.isSuccess = false;
+      state.message = "";
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -50,6 +70,19 @@ export const transactionSlice = createSlice({
         state.transactions = action.payload;
       })
       .addCase(getTransactions.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(makeDeposit.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(makeDeposit.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message = action.payload.message;
+      })
+      .addCase(makeDeposit.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

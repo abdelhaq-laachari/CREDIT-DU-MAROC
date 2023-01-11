@@ -7,10 +7,15 @@ const allTransactions = async () => {
   return response.data;
 };
 
+const depositMoney = async (data) => {
+  const response = await axios.post("/client/deposit", data, config);
+  return response.data;
+}
 
 
 const transactionService = {
   allTransactions,
+  depositMoney,
 };
 
 export default transactionService;

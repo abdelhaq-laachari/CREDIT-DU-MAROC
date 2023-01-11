@@ -3,10 +3,30 @@ import { AiFillCheckCircle, AiOutlinePlus } from "react-icons/ai";
 import MasterCard from "../../components/Credit card/MasterCard";
 import Sidebar from "../../components/Side bar/Sidebar";
 import Nav from "../../components/Top nav/Nav";
+import Swal from 'sweetalert2'
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  
+  const navigate = useNavigate();
 
+  const ShowAlert = () => {
+    Swal.fire({
+      title: "Select the transaction type.",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Deposit",
+      denyButtonText: `Withdraw`,
+      cancelButtonText: "payment",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("deposit");
+      } else if (result.isDenied) {
+        navigate("withdraw");
+      }else if(result.isDismissed){
+        navigate("payment")
+      }
+    });
+  };
 
   return (
     <div className="flex w-full">
@@ -65,7 +85,10 @@ const Home = () => {
                 </div>
               </div>
               <div className="w-full flex justify-center items-center">
-                <button className="w-max flex items-center gap-x-2 bg-blue-500 text-white font-normal text-md rounded-lg p-2">
+                <button
+                  onClick={ShowAlert}
+                  className="w-max flex items-center gap-x-2 bg-blue-500 text-white font-normal text-md rounded-lg p-2"
+                >
                   <AiOutlinePlus />
                   New Transaction
                 </button>
