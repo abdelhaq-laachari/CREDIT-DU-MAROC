@@ -1,13 +1,47 @@
 import React from "react";
 import { AiFillCheckCircle, AiOutlinePlus } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { getCard } from "../../features/card/cardSlice";
+import { useEffect } from "react";
 import MasterCard from "../../components/Credit card/MasterCard";
 import Sidebar from "../../components/Side bar/Sidebar";
 import Nav from "../../components/Top nav/Nav";
-import Swal from 'sweetalert2'
-import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import Spinner from "../../components/Spinner/Spinner";
 
 const Home = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.auth);
+  const { card, isSuccess, isLoading, isError, message } = useSelector(
+    (state) => state.card
+  );
+
+  if (isSuccess) {
+    var balance = card.balance;
+    var currency = card.currency;
+  }
+  console.log(card);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    if (!user) {
+      navigate("/signin");
+    }
+
+    dispatch(getCard());
+
+  }, []);
+
+  if(!card){
+    return <Spinner/>
+  }
+  
 
   const ShowAlert = () => {
     Swal.fire({
@@ -22,8 +56,8 @@ const Home = () => {
         navigate("deposit");
       } else if (result.isDenied) {
         navigate("withdraw");
-      }else if(result.isDismissed){
-        navigate("payment")
+      } else if (result.isDismissed) {
+        navigate("makePayment");
       }
     });
   };
@@ -45,7 +79,7 @@ const Home = () => {
                   Card Balance:
                 </span>
                 <span className="text-lg w-1/2 font-bold text-[#191C1F]">
-                  $ 1028
+                  {balance} DH
                 </span>
               </div>
               <div className=" w-3/4 space-x-9 flex items-center justify-between">
@@ -53,7 +87,7 @@ const Home = () => {
                   Credit limit:
                 </span>
                 <span className="text-lg w-1/2 font-bold text-[#191C1F]">
-                  $ 100,000
+                  100,000 DH
                 </span>
               </div>
               <div className="w-full my-3">
@@ -80,7 +114,7 @@ const Home = () => {
                     Currency
                   </span>
                   <span className="text-lg w-1/2 font-bold text-[#191C1F]">
-                    USD
+                    {currency}
                   </span>
                 </div>
               </div>

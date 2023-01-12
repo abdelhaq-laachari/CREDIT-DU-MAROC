@@ -79,7 +79,6 @@ const loginClient = asyncHandler(async (req, res) => {
     const isMatch = await bcrypt.compare(password, client.password);
     if (isMatch) {
       res.status(201).json({
-        // client,
         Token: generateToken(client._id),
       });
     } else {

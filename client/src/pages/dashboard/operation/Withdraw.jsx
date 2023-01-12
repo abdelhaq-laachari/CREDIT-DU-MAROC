@@ -19,6 +19,7 @@ const Transaction = () => {
   const { isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.transaction
   );
+  const { card } = useSelector((state) => state.card);
 
   const date = new Date();
   const newDate = new Intl.DateTimeFormat("en-US", {
@@ -29,15 +30,12 @@ const Transaction = () => {
     minute: "2-digit",
     second: "2-digit",
   }).format(date);
-  // console.log(newDate);
 
   const [form, setForm] = useState({
     amount: "",
     description: "",
     date: newDate,
-    // client: user._id,
   });
-
 
   const { amount, description } = form;
 
@@ -70,6 +68,11 @@ const Transaction = () => {
     };
   }, [isError, isSuccess, message, user, navigate, dispatch]);
 
+  if (card) {
+    var balance = card.balance;
+    var currency = card.currency;
+  }
+
   if (isLoading) {
     return <Spinner />;
   }
@@ -87,7 +90,9 @@ const Transaction = () => {
             <MasterCard />
             <div className="flex justify-between">
               <span className="text-xl font-semibold ">My Balance</span>
-              <span className="text-xl font-semibold w-1/3">1000 $</span>
+              <span className="text-xl font-semibold w-1/3">
+                {balance + " " + currency}{" "}
+              </span>
             </div>
           </div>
           <div className="w-full">

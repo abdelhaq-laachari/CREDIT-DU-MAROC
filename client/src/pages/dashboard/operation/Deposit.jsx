@@ -19,6 +19,7 @@ const Transaction = () => {
   const { isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.transaction
   );
+  const { card } = useSelector((state) => state.card);
 
   const myDate = new Date();
   const newDate = new Intl.DateTimeFormat("en-US", {
@@ -30,7 +31,6 @@ const Transaction = () => {
     second: "2-digit",
   }).format(myDate);
 
-
   const [amount, setAmount] = useState();
   const [description, setDescription] = useState("");
   const [date, setDate] = useState(newDate);
@@ -40,7 +40,6 @@ const Transaction = () => {
     description,
     date,
   };
-
 
   const getDescription = (e) => {
     setDescription(e.target.value);
@@ -65,15 +64,19 @@ const Transaction = () => {
       navigate("/signin");
     }
 
-    if (isSuccess) {
-      toast.success(message);
-      // dispatch(reset())
-    }
-
     return () => {
       dispatch(reset());
     };
   }, [isError, isSuccess, message, user, navigate, dispatch]);
+
+  if (isSuccess) {
+    toast.success(message);
+  }
+
+  if (card) {
+    var balance = card.balance;
+    var currency = card.currency;
+  }
 
   if (isLoading) {
     return <Spinner />;
@@ -92,7 +95,9 @@ const Transaction = () => {
             <MasterCard />
             <div className="flex justify-between">
               <span className="text-xl font-semibold ">My Balance</span>
-              <span className="text-xl font-semibold w-1/3">1000 $</span>
+              <span className="text-xl font-semibold w-1/3">
+                {balance + " " + currency}{" "}
+              </span>
             </div>
           </div>
           <div className="w-full">

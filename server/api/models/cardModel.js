@@ -4,6 +4,7 @@ const cardSchema = mongoose.Schema(
   {
     client: {
       type: mongoose.Schema.Types.ObjectId,
+      ref:'Client'
     },
     balance: {
       type: Number,

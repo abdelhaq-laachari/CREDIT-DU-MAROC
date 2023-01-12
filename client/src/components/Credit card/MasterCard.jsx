@@ -1,7 +1,44 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { reset, getCard } from "../../features/card/cardSlice";
 import Mcrd from "../../assets/img/mcrd.svg";
+import { useEffect } from "react";
+import Spinner from "../Spinner/Spinner";
 
 const MasterCard = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.auth);
+  const { card, isSuccess, isError, isLoading, message } = useSelector(
+    (state) => state.card
+  );
+
+  if (isSuccess) {
+    var balance = card.balance;
+    var currency = card.currency;
+    var cardNumber = card.cardNumber
+      .toString()
+      .match(/.{1,4}/g)
+      .join(" ");
+    var fullName = card.client.firstName + " " + card.client.lastName;
+  }
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    if (!user) {
+      navigate("/signin");
+    }
+    dispatch(getCard());
+    return () => {
+      dispatch(reset());
+    };
+  }, []);
+
   return (
     <div className="text-gray-600">
       <div className="mx-auto">
@@ -58,19 +95,20 @@ const MasterCard = () => {
                   </div>
                 </div>
                 <span className="text-white font-bold text-xl">
-                  5327 9574 8433 7981
+                  {cardNumber}
                 </span>
               </div>
               <div className="flex w-full justify-between items-center">
-              <div className="flex flex-col">
-                <span className="text-xs font-semibold tracking-tight">
-                  Valid Thru <span className="text-md font-normal">12/24</span>
-                </span>
-                <span className="text-md">Mr. Alex Parker</span>
-              </div>
-              <div className="w-20">
-                <img src={Mcrd} alt="" />
-              </div>
+                <div className="flex flex-col">
+                  <span className="text-xs font-semibold tracking-tight">
+                    Valid Thru{" "}
+                    <span className="text-md font-normal">12/24</span>
+                  </span>
+                  <span className="text-md">Mr. {fullName} </span>
+                </div>
+                <div className="w-20">
+                  <img src={Mcrd} alt="" />
+                </div>
               </div>
             </div>
           </div>

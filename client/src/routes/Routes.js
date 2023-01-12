@@ -34,7 +34,7 @@ const routes = () => {
             <Route path="profile" element={<Profile />} />
             <Route path="deposit" element={<Deposit />} />
             <Route path="withdraw" element={<Withdraw />} />
-            <Route path="send" element={<Send />} />
+            <Route path="makePayment" element={<Send />} />
           </Route>
           <Route path="*" element={<Error />} />
         </Routes>

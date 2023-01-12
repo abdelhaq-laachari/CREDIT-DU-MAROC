@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Datatable from "../../components/datatable/Datatable";
-import Sidebar from "../../components/Side bar/Sidebar";
-import Nav from "../../components/Top nav/Nav";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -9,6 +6,9 @@ import {
   getTransactions,
   reset,
 } from "../../features/transaction/transactionSlice";
+import Datatable from "../../components/datatable/Datatable";
+import Sidebar from "../../components/Side bar/Sidebar";
+import Nav from "../../components/Top nav/Nav";
 import Spinner from "../../components/Spinner/Spinner";
 
 const Transaction = () => {
