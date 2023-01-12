@@ -4,6 +4,7 @@ const transactionSchema = mongoose.Schema(
   {
     client: {
         type: mongoose.Schema.Types.ObjectId,
+        ref: "Client",
     },
     amount: {
         type: Number,
@@ -17,6 +18,10 @@ const transactionSchema = mongoose.Schema(
         type: String,
         required: true,
     },
+    type: {
+        type: String,
+        required: true,
+    }
   },
   {
     timestamp: true,

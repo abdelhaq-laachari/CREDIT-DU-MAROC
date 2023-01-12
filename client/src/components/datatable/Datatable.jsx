@@ -2,6 +2,7 @@ import "./datatable.css";
 import { DataGrid } from "@mui/x-data-grid";
 import { transactionsColumns, paymentColumns } from "../../datatablesource";
 import { Link } from "react-router-dom";
+import {downloadAction} from "../../actionTable"
 
 const Datatable = ({ data, title }) => {
   const path = window.location.pathname.split("/")[2];
@@ -11,7 +12,7 @@ const Datatable = ({ data, title }) => {
   const switchFunction = () => {
     switch (path) {
       case "transaction":
-        return transactionsColumns.concat();
+        return transactionsColumns.concat().concat(downloadAction);
       case "payments":
         return paymentColumns.concat();
       default:

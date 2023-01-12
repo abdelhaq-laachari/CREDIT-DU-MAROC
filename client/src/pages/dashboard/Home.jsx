@@ -35,13 +35,11 @@ const Home = () => {
     }
 
     dispatch(getCard());
-
   }, []);
 
-  if(!card){
-    return <Spinner/>
+  if (!card) {
+    return <Spinner />;
   }
-  
 
   const ShowAlert = () => {
     Swal.fire({
@@ -61,6 +59,7 @@ const Home = () => {
       }
     });
   };
+
 
   return (
     <div className="flex w-full">
@@ -121,7 +120,7 @@ const Home = () => {
               <div className="w-full flex justify-center items-center">
                 <button
                   onClick={ShowAlert}
-                  className="w-max flex items-center gap-x-2 bg-blue-500 text-white font-normal text-md rounded-lg p-2"
+                  className="w-max flex items-center gap-x-2 bg-blue-500 text-white font-normal text-base rounded-lg p-2"
                 >
                   <AiOutlinePlus />
                   New Transaction

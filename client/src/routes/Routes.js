@@ -14,7 +14,7 @@ import Payment from "../pages/dashboard/Payment";
 import Deposit from "../pages/dashboard/operation/Deposit";
 import Withdraw from "../pages/dashboard/operation/Withdraw";
 import Send from "../pages/dashboard/operation/Send";
-
+import Download from "../pages/dashboard/Download";
 
 
 const routes = () => {
@@ -24,6 +24,7 @@ const routes = () => {
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/download" element={<Download />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/service" element={<Services />} />
           <Route path="/about" element={<About />} />

@@ -12,7 +12,7 @@ const About = () => {
             We’re changing the way people think about banking
           </span>
           <div className="lg:w-1/2 w-9/12">
-            <p className="tracking-wide text-sm md:text-lg lg:text-md text-center lg:tracking-tighter mb-5 text-[#505A63] font-circular">
+            <p className="tracking-wide text-sm md:text-lg lg:text-base text-center lg:tracking-tighter mb-5 text-[#505A63] font-circular">
               <strong>Crédit du maroc</strong> is a financial technology company
               founded on the premise that basic banking services should be
               helpful, easy and free. We want to profit with our members, not
@@ -20,7 +20,7 @@ const About = () => {
               monthly service fees, service fees, minimum balance requirements,
               and more.
             </p>
-            <p className="tracking-wide text-sm md:text-lg lg:text-md lg:tracking-tighter text-center text-[#505A63] font-circular">
+            <p className="tracking-wide text-sm md:text-lg lg:text-base lg:tracking-tighter text-center text-[#505A63] font-circular">
               We partner with regional banks to design member first financial
               products. This creates a more competitive market with better,
               lower-cost options for everyday Americans who aren’t being served
@@ -34,7 +34,7 @@ const About = () => {
             <span className="font-circular text-3xl lg:text-5xl font-bold">
               Our Mission
             </span>
-            <p className="font-circular text-sm lg:text-md w-3/4 lg:w-1/2">
+            <p className="font-circular text-sm lg:text-base w-3/4 lg:w-1/2">
               We created C.D.M because we believe everyone deserves financial
               peace of mind. We’re building a new kind of online bank account
               that helps members get ahead by making managing money easy. It’s
@@ -47,18 +47,18 @@ const About = () => {
             <span className="font-circular text-3xl lg:text-5xl font-bold">
               Our Culture
             </span>
-            <p className="font-circular text-sm lg:text-md w-3/4 lg:w-1/2 mb-4">
+            <p className="font-circular text-sm lg:text-base w-3/4 lg:w-1/2 mb-4">
               We believe that creating a company where people love to work is
               built on relationships, growth, and impact.
             </p>
-            <p className="font-circular text-sm lg:text-md w-3/4 lg:w-1/2">
+            <p className="font-circular text-sm lg:text-base w-3/4 lg:w-1/2">
               We cultivate a culture of low ego and set a high bar for
               excellence. We believe in flat organizations and open work spaces.
               We treat one another inside the company the same way we treat our
               members–by communicating in ways that build trust, operating with
               transparency, and having one another’s back.
             </p>
-            <p className="font-circular text-sm lg:text-md w-3/4 lg:w-1/2">
+            <p className="font-circular text-sm lg:text-base w-3/4 lg:w-1/2">
               We recognize the contributions of individuals and celebrate wins
               as a team. Every member of the team is an owner of the company and
               is encouraged to “Chime In” on any part of the business. What we

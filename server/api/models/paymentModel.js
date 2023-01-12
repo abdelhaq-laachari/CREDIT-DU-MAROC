@@ -4,6 +4,7 @@ const paymentSchema = mongoose.Schema(
   {
     client: {
       type: mongoose.Schema.Types.ObjectId,
+      ref: "Client",
     },
     amount: {
         type: Number,

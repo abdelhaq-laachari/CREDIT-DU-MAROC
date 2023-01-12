@@ -20,7 +20,7 @@ const Home = () => {
           <strong className="lg:text-6xl text-4xl font-circular ">
             Checking <br /> account with <br /> no monthly fees
           </strong>
-          <p className="font-circular pl-1 lg:text-sm subpixel-antialiased text-md">
+          <p className="font-circular pl-1 lg:text-sm subpixel-antialiased text-base">
             An online checking account built for you. Open your account for free
             and easily manage your money with 24/7 mobile banking. Access cash
             with over 60,000 fee-free ATMs.1
@@ -33,7 +33,7 @@ const Home = () => {
       <div className="flex flex-col items-center">
         {/* text start here */}
         <div className="flex text-center flex-col items-center font-circular text-[#191C1F]">
-          <span className="text-md lg:text-xl">Everyday essentials</span>
+          <span className="text-base lg:text-xl">Everyday essentials</span>
           <strong className="my-5 text-4xl md:text-5xl lg:text-6xl">
             Send, spend and save smarter
           </strong>
@@ -52,7 +52,7 @@ const Home = () => {
               <br />
               free
             </span>
-            <span className="lg:text-lg text-md tracking-wide lg:leading-8">
+            <span className="lg:text-lg text-base tracking-wide lg:leading-8">
               Send and request money with a tap, split bills <br /> easily with
               anyone in 200+ countries
             </span>
@@ -82,7 +82,7 @@ const Home = () => {
               <span>Open an online </span> <span>checking account </span>{" "}
               <span> for free today</span>
             </div>
-            <span className="text-md text-center font-circular">
+            <span className="text-base text-center font-circular">
               No monthly services fees. No minimum balance requirements.
             </span>
             <button className="bg-[#333333] text-white font-circular font-bold text-lg px-10 py-3 rounded-3xl mt-5">

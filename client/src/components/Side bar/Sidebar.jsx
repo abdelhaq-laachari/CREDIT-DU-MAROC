@@ -40,7 +40,7 @@ const App = () => {
         </div>
         <ul className="pt-9">
           <Link to="/dashboard">
-            <li className="flex mb-2 rounded-md p-2 cursor-pointer hover:bg-gray-600 hover:text-white transition-colors text-md items-center gap-x-4">
+            <li className="flex mb-2 rounded-md p-2 cursor-pointer hover:bg-gray-600 hover:text-white transition-colors text-base items-center gap-x-4">
               <AiFillCreditCard />
               <span className={`${!open && "hidden"} origin-left duration-200`}>
                 Cards
@@ -48,7 +48,7 @@ const App = () => {
             </li>
           </Link>
           <Link to="/dashboard/transaction">
-            <li className="flex mb-2 rounded-md p-2 cursor-pointer hover:bg-gray-600 hover:text-white transition-colors text-md items-center gap-x-4">
+            <li className="flex mb-2 rounded-md p-2 cursor-pointer hover:bg-gray-600 hover:text-white transition-colors text-base items-center gap-x-4">
               <AiOutlineTransaction />
               <span className={`${!open && "hidden"} origin-left duration-200`}>
                 Transaction
@@ -56,7 +56,7 @@ const App = () => {
             </li>
           </Link>
           <Link to="/dashboard/payments">
-            <li className="flex mb-2 rounded-md p-2 cursor-pointer hover:bg-gray-600 hover:text-white transition-colors text-md items-center gap-x-4">
+            <li className="flex mb-2 rounded-md p-2 cursor-pointer hover:bg-gray-600 hover:text-white transition-colors text-base items-center gap-x-4">
               <MdOutlinePayments />
               <span className={`${!open && "hidden"} origin-left duration-200`}>
                 Payments
@@ -64,7 +64,7 @@ const App = () => {
             </li>
           </Link>
           <Link to="/dashboard/profile">
-            <li className="flex mb-2 rounded-md p-2 cursor-pointer hover:bg-gray-600 hover:text-white transition-colors text-md items-center gap-x-4">
+            <li className="flex mb-2 rounded-md p-2 cursor-pointer hover:bg-gray-600 hover:text-white transition-colors text-base items-center gap-x-4">
               <FaUserCircle />
               <span className={`${!open && "hidden"} origin-left duration-200`}>
                 Profile
@@ -72,7 +72,7 @@ const App = () => {
             </li>
           </Link>
           <Link to="/search">
-            <li className="flex mb-2 rounded-md p-2 cursor-pointer hover:bg-gray-600 hover:text-white transition-colors text-md items-center gap-x-4">
+            <li className="flex mb-2 rounded-md p-2 cursor-pointer hover:bg-gray-600 hover:text-white transition-colors text-base items-center gap-x-4">
               <AiOutlineLogout />
               <span className={`${!open && "hidden"} origin-left duration-200`}>
                 Log Out

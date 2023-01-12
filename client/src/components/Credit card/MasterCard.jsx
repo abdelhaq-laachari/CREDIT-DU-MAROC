@@ -102,9 +102,9 @@ const MasterCard = () => {
                 <div className="flex flex-col">
                   <span className="text-xs font-semibold tracking-tight">
                     Valid Thru{" "}
-                    <span className="text-md font-normal">12/24</span>
+                    <span className="text-base font-normal">12/24</span>
                   </span>
-                  <span className="text-md">Mr. {fullName} </span>
+                  <span className="text-base">Mr. {fullName} </span>
                 </div>
                 <div className="w-20">
                   <img src={Mcrd} alt="" />

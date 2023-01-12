@@ -27,13 +27,13 @@ const footer = () => {
             <p className="text-gray-800 font-bold text-2xl pb-4">
               Get to know us
             </p>
-            <li className="text-gray-500 text-md pb-2 font-semibold hover:text-blue-600 cursor-pointer">
+            <li className="text-gray-500 text-base pb-2 font-semibold hover:text-blue-600 cursor-pointer">
               About us
             </li>
-            <li className="text-gray-500 text-md pb-2 font-semibold hover:text-blue-600 cursor-pointer">
+            <li className="text-gray-500 text-base pb-2 font-semibold hover:text-blue-600 cursor-pointer">
               What our customers think
             </li>
-            <li className="text-gray-500 text-md pb-2 font-semibold hover:text-blue-600 cursor-pointer">
+            <li className="text-gray-500 text-base pb-2 font-semibold hover:text-blue-600 cursor-pointer">
               Press & Media
             </li>
           </ul>
@@ -43,10 +43,10 @@ const footer = () => {
             <p className="text-gray-800 font-bold text-2xl pb-4">
               We’re here for you
             </p>
-            <li className="text-gray-500 text-md pb-2 font-semibold hover:text-blue-600 cursor-pointer">
+            <li className="text-gray-500 text-base pb-2 font-semibold hover:text-blue-600 cursor-pointer">
               Contact us
             </li>
-            <li className="text-gray-500 text-md pb-2 font-semibold hover:text-blue-600 cursor-pointer">
+            <li className="text-gray-500 text-base pb-2 font-semibold hover:text-blue-600 cursor-pointer">
               Help center
             </li>
           </ul>
@@ -54,10 +54,10 @@ const footer = () => {
         <div className="p-5">
           <ul>
             <p className="text-gray-800 font-bold text-2xl pb-4">Legal</p>
-            <li className="text-gray-500 text-md pb-2 font-semibold hover:text-blue-600 cursor-pointer">
+            <li className="text-gray-500 text-base pb-2 font-semibold hover:text-blue-600 cursor-pointer">
               Privacy policy
             </li>
-            <li className="text-gray-500 text-md pb-2 font-semibold hover:text-blue-600 cursor-pointer">
+            <li className="text-gray-500 text-base pb-2 font-semibold hover:text-blue-600 cursor-pointer">
               Terms and conditions
             </li>
           </ul>

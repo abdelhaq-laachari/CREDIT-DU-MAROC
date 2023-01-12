@@ -31,7 +31,7 @@ const Services = () => {
             <span className="text-4xl lg:text-6xl font-bold font-circular">
               Sending money, easy by default
             </span>
-            <p className="lg:text-md font-circular text-[#505A63]">
+            <p className="lg:text-base font-circular text-[#505A63]">
               Moving money should never take more than a few taps. Transfers are
               always free between Revolute friends (and you can even add a gif,
               apparently the kids love it these days)
@@ -76,7 +76,7 @@ const Services = () => {
             <span className="text-3xl lg:text-5xl font-bold font-circular">
               Request money in any combo of currencies
             </span>
-            <p className="text-md font-circular text-[#505A63]">
+            <p className="text-base font-circular text-[#505A63]">
               Choose your way to ask for money: send payment links, try ‘near
               me’ or flash QR codes, so there’s no escape from paying you back
             </p>
@@ -114,7 +114,7 @@ const Services = () => {
             <span className="text-3xl lg:text-5xl font-bold font-circular">
               Your money is protected by regulated banks
             </span>
-            <p className="text-md font-circular text-[#505A63]">
+            <p className="text-base font-circular text-[#505A63]">
               By law and under FCA regulation, your money is protected by
               regulated banks. We keep your money in these accounts until you
               pay it out

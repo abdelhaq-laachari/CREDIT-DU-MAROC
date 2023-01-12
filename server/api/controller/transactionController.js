@@ -27,6 +27,7 @@ const deposit = asyncHandler(async (req, res) => {
     amount,
     date,
     description,
+    type: "deposit",
   });
   const createdTransaction = await transaction.save();
   const balance = await Card.findOne({ client: clientId });
@@ -34,7 +35,7 @@ const deposit = asyncHandler(async (req, res) => {
   balance.balance = newBalance;
   await balance.save();
   res.status(201).json({
-    message: `Thank you for your deposit of ${amount}. Your current account balance is ${newBalance}. Please keep your transaction receipt for your records.`,
+    message: `Thank you for your deposit of ${amount} MAD. Your current account balance is ${newBalance} MAD. Please keep your transaction receipt for your records.`,
   });
 });
 
@@ -50,19 +51,20 @@ const withdraw = asyncHandler(async (req, res) => {
     amount,
     date,
     description,
+    type: "withdraw",
   });
   const createdTransaction = await transaction.save();
   const balance = await Card.findOne({ client: clientId });
   if (balance.balance < amount) {
     res.status(400).json({
-      message: `You have insufficient funds to withdraw ${amount}. Your current account balance is ${balance.balance}. Please deposit more funds to your account.`,
+      message: `You have insufficient funds to withdraw ${amount} MAD. Your current account balance is ${balance.balance} MAD. Please deposit more funds to your account.`,
     });
   } else {
     const newBalance = balance.balance - amount;
     balance.balance = newBalance;
     await balance.save();
     res.status(201).json({
-      message: `Thank you for your withdrawal of ${amount}. Your current account balance is ${newBalance}. Please keep your transaction receipt for your records.`,
+      message: `Thank you for your withdrawal of ${amount} MAD. Your current account balance is ${newBalance} MAD. Please keep your transaction receipt for your records.`,
     });
   }
 });

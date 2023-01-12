@@ -10,6 +10,9 @@ import Sidebar from "../../../components/Side bar/Sidebar";
 import Nav from "../../../components/Top nav/Nav";
 import MasterCard from "../../../components/Credit card/MasterCard";
 import Spinner from "../../../components/Spinner/Spinner";
+import Swal from "sweetalert2";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import DownloadPdf from "../../../components/PDF/DownloadPdf";
 
 const Transaction = () => {
   const navigate = useNavigate();
@@ -70,8 +73,23 @@ const Transaction = () => {
   }, [isError, isSuccess, message, user, navigate, dispatch]);
 
   if (isSuccess) {
-    toast.success(message);
+    Swal.fire({
+      title: "Great!",
+      text: message,
+      icon: "success",
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Okay",
+    });
   }
+  const download = () => {
+    return (
+      <PDFDownloadLink document={<DownloadPdf />} fileName="receipt">
+        {({ loading, error }) =>
+          loading ? "Loading document..." : "Download now!"
+        }
+      </PDFDownloadLink>
+    );
+  };
 
   if (card) {
     var balance = card.balance;

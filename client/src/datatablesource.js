@@ -50,14 +50,26 @@ export const userColumns = [
 ];
 
 export const transactionsColumns = [
-  { field: "_id", headerName: "ID", width: 170 },
+  { field: "_id", headerName: "ID", width: 100 },
+  {
+    field: "type",
+    headerName: "Type",
+    width: 150,
+    renderCell: (params) => {
+      return (
+        <div className="font-bold text-base capitalize">
+          {params.row.type}
+        </div>
+      );
+    }
+  },
   {
     field: "amount",
     headerName: "Amount",
-    width: 170,
+    width: 150,
     renderCell: (params) => {
       return (
-        <div className="font-semibold text-md">
+        <div className="font-semibold ">
           {params.row.amount} <span className="font-semibold">USD</span>
         </div>
       );
@@ -66,24 +78,24 @@ export const transactionsColumns = [
   {
     field: "date",
     headerName: "Date",
-    width: 170,
+    width: 150,
   },
   {
     field: "description",
     headerName: "Description",
-    width: 270,
+    width: 200,
   },
 ];
 
 export const paymentColumns = [
-  { field: "_id", headerName: "ID", width: 170 },
+  { field: "_id", headerName: "ID", width: 130 },
   {
     field: "amount",
     headerName: "Amount",
-    width: 170,
+    width: 140,
     renderCell: (params) => {
       return (
-        <div className="font-semibold text-md">
+        <div className="font-semibold text-base">
           {params.row.amount} <span className="font-semibold">USD</span>
         </div>
       );
@@ -97,15 +109,15 @@ export const paymentColumns = [
   {
     field: "description",
     headerName: "Description",
-    width: 270,
+    width: 220,
   },
   {
     field: "payee",
     headerName: "Payee",
-    width: 170,
+    width: 210,
     renderCell: (params) => {
       return (
-        <div className="font-semibold text-md">
+        <div className="font-semibold text-base">
           {params.row.payee}
         </div>
       );
@@ -113,40 +125,3 @@ export const paymentColumns = [
   },
 ];
 
-export const orderColumns = [
-  { field: "_id", headerName: "ID", width: 170 },
-  {
-    field: "quantity",
-    headerName: "Quantity",
-    width: 100,
-  },
-  {
-    field: "status",
-    headerName: "Status",
-    width: 160,
-    renderCell: (params) => {
-      return (
-        <div className={`cellWithStatus ${params.row.status}`}>
-          {params.row.status}
-        </div>
-      );
-    },
-  },
-  {
-    // get the name of the client from the object id
-    field: "idClient",
-    headerName: "Client",
-    width: 230,
-    renderCell: (params) => {
-      return <div className="cellWithImg">{params.row.idClient.fullName}</div>;
-    },
-  },
-  {
-    field: "idCar",
-    headerName: "Car",
-    width: 170,
-    renderCell: (params) => {
-      return <div className="cellWithImg">{params.row.idCar.name} {params.row.idCar.edition} </div>;
-    },
-  },
-];
