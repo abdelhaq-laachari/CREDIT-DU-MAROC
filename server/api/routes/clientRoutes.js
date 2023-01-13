@@ -4,8 +4,8 @@ const router = express.Router(); // Create a router
 
 // Import controllers
 const { registerClient, loginClient, singleClient, updateClient } = require("../controller/clientController");
-const { send, payments } = require("../controller/paymentConrtroller");
-const { getTransactions, deposit, withdraw } = require("../controller/transactionController");
+const { send, myPayments } = require("../controller/paymentConrtroller");
+const { myTransactions, deposit, withdraw } = require("../controller/transactionController");
 
 // Import middleware
 const { protectClient } = require("../middleware/clientMiddleware");
@@ -23,7 +23,7 @@ router.route("/profile").get(protectClient, singleClient);
 router.route("/update").put(protectClient, updateClient);
 
 // @desc   get all transactions
-router.route("/transactions").get(protectClient, getTransactions);
+router.route("/transactions").get(protectClient, myTransactions);
 
 // @desc  make a deposit
 router.route("/deposit").post(protectClient, deposit);
@@ -32,7 +32,7 @@ router.route("/deposit").post(protectClient, deposit);
 router.route("/withdraw").post(protectClient, withdraw);
 
 // @desc  Gat all payment
-router.route("/payments").get(protectClient, payments);
+router.route("/myPayments").get(protectClient, myPayments);
 
 // @desc  Make payment
 router.route("/makePayment").post(protectClient, send);

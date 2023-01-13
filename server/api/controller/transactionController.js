@@ -2,11 +2,11 @@ const Transaction = require("../models/transactionModel");
 const Card = require("../models/cardModel");
 const asyncHandler = require("express-async-handler");
 
-// @desc    Get all transactions
+// @desc    Get all client transactions
 // @route   GET /client/transactions
 // @access  Private
 
-const getTransactions = asyncHandler(async (req, res) => {
+const myTransactions = asyncHandler(async (req, res) => {
   const clientId = req.client;
   const transactions = await Transaction.find({ client: clientId });
   res.send(transactions);
@@ -69,8 +69,18 @@ const withdraw = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Get a all transactions
+// @route   GET /admin/transactions
+// @access  Private
+
+const getTransactions = asyncHandler(async (req, res) => {
+  const transactions = await Transaction.find({}).populate("client", "firstName lastName");
+  res.send(transactions);
+});
+
 // export
 module.exports = {
+  myTransactions,
   getTransactions,
   deposit,
   withdraw,

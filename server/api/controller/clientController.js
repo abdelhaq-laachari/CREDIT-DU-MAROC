@@ -95,7 +95,7 @@ const loginClient = asyncHandler(async (req, res) => {
 // @route   GET /client/singleClient/:id
 // @access  Private
 const singleClient = asyncHandler(async (req, res) => {
-  const idClient = req.client;
+  const idClient = req.params.id;
   const client = await Client.findById(idClient).select("-password");
   if (client) {
     res.send(client);

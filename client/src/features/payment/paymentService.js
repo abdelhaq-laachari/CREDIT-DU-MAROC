@@ -3,7 +3,7 @@ import { config } from "../../getToken";
 
 // get all payments
 const allPayments = async () => {
-  const response = await axios.get("/client/payments",config);
+  const response = await axios.get("/client/myPayments",config);
   return response.data;
 };
 
