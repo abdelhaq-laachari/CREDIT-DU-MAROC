@@ -38,7 +38,7 @@ const send = asyncHandler(async (req, res) => {
 
 const myPayments = asyncHandler(async (req, res) => {
   const clientId = req.client;
-  const payments = await Payment.find({ client : clientId });
+  const payments = await Payment.find({ client: clientId });
   res.json(payments);
 })
 
@@ -46,13 +46,25 @@ const myPayments = asyncHandler(async (req, res) => {
 // @route   GET /admin/payments
 // @access  Private
 
-const allPayments = asyncHandler(async(req,res)=>{
+const allPayments = asyncHandler(async (req, res) => {
   const payments = await Payment.find({}).populate('client', 'firstName lastName');
   res.json(payments);
 })
 
+
+// @desc    Get total payments
+// @route   GET /admin/totalPayments
+// @access  Private
+
+const totalPayments = asyncHandler(async (req, res) => {
+  const total = await Payment.countDocuments();
+  res.status(200).json(total);
+});
+
 module.exports = {
   send,
   myPayments,
-  allPayments
+  allPayments,
+  totalPayments
+
 };

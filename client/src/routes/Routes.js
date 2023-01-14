@@ -15,6 +15,7 @@ import Deposit from "../pages/dashboard/operation/Deposit";
 import Withdraw from "../pages/dashboard/operation/Withdraw";
 import Send from "../pages/dashboard/operation/Send";
 import Download from "../pages/dashboard/Download";
+import ProtectedRoute from "./protectedRoute";
 
 
 const routes = () => {
@@ -28,14 +29,16 @@ const routes = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/service" element={<Services />} />
           <Route path="/about" element={<About />} />
-          <Route path="/dashboard">
-            <Route index element={<Home />} />
-            <Route path="transaction" element={<Transaction />} />
-            <Route path="payments" element={<Payment />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="deposit" element={<Deposit />} />
-            <Route path="withdraw" element={<Withdraw />} />
-            <Route path="makePayment" element={<Send />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/dashboard">
+              <Route index element={<Home />} />
+              <Route path="transaction" element={<Transaction />} />
+              <Route path="payments" element={<Payment />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="deposit" element={<Deposit />} />
+              <Route path="withdraw" element={<Withdraw />} />
+              <Route path="makePayment" element={<Send />} />
+            </Route>
           </Route>
           <Route path="*" element={<Error />} />
         </Routes>

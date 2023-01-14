@@ -4,6 +4,7 @@ const Card = require("../models/cardModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const generator = require("creditcard-generator");
+const cookieParser = require('cookie-parser');
 
 // @desc    Register a new client
 // @route   POST /client/register
@@ -48,9 +49,9 @@ const registerClient = asyncHandler(async (req, res) => {
       currency: "MAD",
       cardNumber: generator.GenCC().toString(),
     });
-    res.status(201).json({
-      Token: generateToken(client._id),
-    });
+    const token = generateToken(client._id);
+    res.status(201).json({ token });
+
   } else {
     res.status(400);
     throw new Error("Invalid user data");
@@ -78,9 +79,8 @@ const loginClient = asyncHandler(async (req, res) => {
     // check for password
     const isMatch = await bcrypt.compare(password, client.password);
     if (isMatch) {
-      res.status(201).json({
-        Token: generateToken(client._id),
-      });
+      const token = generateToken(client._id);
+      res.status(201).json({ token });
     } else {
       res.status(401);
       throw new Error("Invalid email or password");
@@ -133,13 +133,24 @@ const updateClient = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Get total clients
+// @route   GET /admin/totalClients
+// @access  Private
+
+const totalClients = asyncHandler(async (req, res) => {
+  const total = await Client.countDocuments();
+  res.status(200).json(total);
+});
+
+
 // @desc Generate token
 
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "30d",
+    expiresIn: "1d",
   });
 };
+
 
 module.exports = {
   registerClient,
@@ -147,4 +158,5 @@ module.exports = {
   singleClient,
   getClients,
   updateClient,
+  totalClients
 };

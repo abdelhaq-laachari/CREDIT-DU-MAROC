@@ -4,11 +4,12 @@ const router = express.Router(); // Create a router
 
 // Import controllers
 const { registerClient, loginClient, singleClient, updateClient } = require("../controller/clientController");
-const { send, myPayments } = require("../controller/paymentConrtroller");
+const { send, myPayments } = require("../controller/paymentController");
 const { myTransactions, deposit, withdraw } = require("../controller/transactionController");
 
 // Import middleware
 const { protectClient } = require("../middleware/clientMiddleware");
+const { checkAuth } = require("../middleware/checkAuth");
 
 // @desc    Register a new client
 router.route("/register").post(registerClient);
@@ -39,5 +40,8 @@ router.route("/makePayment").post(protectClient, send);
 
 // @desc Get Balance
 router.route("/card").get(protectClient, getBalance);
+
+// @desc Check token
+router.route("/checkAuth").get(checkAuth);
 
 module.exports = router;

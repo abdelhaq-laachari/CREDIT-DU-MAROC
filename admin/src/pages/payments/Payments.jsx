@@ -1,4 +1,4 @@
-import "./orders.scss";
+import "./payments.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import Datatable from "../../components/datatable/Datatable";
@@ -7,11 +7,12 @@ import axios from "axios";
 import { config } from "../../getToken";
 
 const Cars = () => {
-  
+  const token = localStorage.getItem("accessToken");
   const [data, setData] = useState([]);
+  // get data from database using axios
   useEffect(() => {
     axios
-      .get("admin/transactions", config)
+      .get("admin/payments", config)
       .then((res) => {
         console.log(res.data);
         setData(res.data);
@@ -23,7 +24,7 @@ const Cars = () => {
       <Sidebar />
       <div className="listContainer">
         <Navbar />
-        <Datatable data={data} title="All Orders" />
+        <Datatable data={data} title="All Payments" />
       </div>
     </div>
   );

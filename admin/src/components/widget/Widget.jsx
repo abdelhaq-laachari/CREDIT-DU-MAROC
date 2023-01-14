@@ -2,9 +2,8 @@ import "./widget.scss";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
-import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave';
+import PaidIcon from '@mui/icons-material/Paid';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 
 const Widget = ({ type,amount }) => {
   let data;
@@ -30,13 +29,13 @@ const Widget = ({ type,amount }) => {
         ),
       };
       break;
-    case "order":
+    case "payments":
       data = {
-        title: "ORDERS",
+        title: "PAYMENTS",
         isMoney: false,
         link: "View all orders",
         icon: (
-          <ShoppingCartOutlinedIcon
+          <PaidIcon
             className="icon"
             style={{
               backgroundColor: "rgba(218, 165, 32, 0.2)",
@@ -46,13 +45,13 @@ const Widget = ({ type,amount }) => {
         ),
       };
       break;
-    case "cars":
+    case "transactions":
       data = {
-        title: "CARS",
+        title: "TRANSACTIONS",
         isMoney: false,
         link: "View all cars",
         icon: (
-          <TimeToLeaveIcon
+          <CurrencyExchangeIcon
             className="icon"
             style={{ backgroundColor: "rgba(0, 128, 0, 0.2)", color: "green" }}
           />

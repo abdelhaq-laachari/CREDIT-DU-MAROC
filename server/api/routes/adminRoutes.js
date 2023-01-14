@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const { getAdmin, registerAdmin, authAdmin } = require("../controller/adminController");
-const { getClients, singleClient } = require("../controller/clientController");
-const { allPayments } = require("../controller/paymentConrtroller");
-const { getTransactions } = require("../controller/transactionController");
+const { getClients, singleClient, totalClients } = require("../controller/clientController");
+const { allPayments, totalPayments } = require("../controller/paymentController");
+const { getTransactions, totalTransactions } = require("../controller/transactionController");
 const { protect } = require("../middleware/authMiddleware");
 
 // @desc    Register a new admin
@@ -26,6 +26,15 @@ router.route("/transactions").get(protect, getTransactions);
 
 // @desc    Get all payments
 router.route("/payments").get(protect, allPayments);
+
+// @desc    Get total clients
+router.route("/totalClients").get(protect, totalClients);
+
+// @desc    Get total payments
+router.route("/totalPayments").get(protect, totalPayments);
+
+// @desc    Get total transactions
+router.route("/totalTransactions").get(protect, totalTransactions);
 
 
 

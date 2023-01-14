@@ -78,10 +78,21 @@ const getTransactions = asyncHandler(async (req, res) => {
   res.send(transactions);
 });
 
+
+// @desc    Get total transactions
+// @route   GET /admin/totalTransactions
+// @access  Private
+
+const totalTransactions = asyncHandler(async (req, res) => {
+  const total = await Transaction.countDocuments();
+  res.status(200).json(total);
+});
+
 // export
 module.exports = {
   myTransactions,
   getTransactions,
   deposit,
   withdraw,
+  totalTransactions,
 };

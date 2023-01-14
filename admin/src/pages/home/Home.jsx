@@ -10,19 +10,19 @@ import axios from "axios";
 import { config } from "../../getToken";
 
 const Home = () => {
-  const [car, setCar] = useState();
-  const [order, setOrder] = useState();
+  const [transactions, setTransactions] = useState();
+  const [payment, setPayment] = useState();
   const [client, setClient] = useState();
 
   useEffect(() => {
-    const totalCar = async () => {
-      const res = await axios.get("admin/totalCars", config);
-      setCar(res.data);
+    const totalTransactions = async () => {
+      const res = await axios.get("admin/totalTransactions", config);
+      setTransactions(res.data);
     };
 
-    const totalOrder = async () => {
-      const res = await axios.get("admin/totalOrders", config);
-      setOrder(res.data);
+    const totalPayments = async () => {
+      const res = await axios.get("admin/totalPayments", config);
+      setPayment(res.data);
     };
 
     const totalClient = async () => {
@@ -30,12 +30,10 @@ const Home = () => {
       setClient(res.data);
     };
 
-    totalCar();
-    totalOrder();
+    totalTransactions();
+    totalPayments();
     totalClient();
   }, []);
-
-  console.log(car);
 
   return (
     <div className="home">
@@ -44,8 +42,8 @@ const Home = () => {
         <Navbar />
         <div className="widgets">
           <Widget type="user" amount={client} />
-          <Widget type="order" amount={order} />
-          <Widget type="cars" amount={car} />
+          <Widget type="transactions" amount={transactions} />
+          <Widget type="payments" amount={payment} />
           <Widget type="balance" amount="100" />
         </div>
         <div className="charts">

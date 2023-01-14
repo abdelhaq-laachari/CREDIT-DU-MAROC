@@ -1,4 +1,4 @@
-import "./cars.scss";
+import "./transactions.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import Datatable from "../../components/datatable/Datatable";
@@ -6,13 +6,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { config } from "../../getToken";
 
-const Cars = () => {
-  const token = localStorage.getItem("accessToken");
+const Transactions = () => {
+  
   const [data, setData] = useState([]);
-  // get data from database using axios
   useEffect(() => {
     axios
-      .get("admin/payments", config)
+      .get("admin/transactions", config)
       .then((res) => {
         console.log(res.data);
         setData(res.data);
@@ -24,10 +23,10 @@ const Cars = () => {
       <Sidebar />
       <div className="listContainer">
         <Navbar />
-        <Datatable data={data} title="All Cars" />
+        <Datatable data={data} title="All Transactions" />
       </div>
     </div>
   );
 };
 
-export default Cars;
+export default Transactions;

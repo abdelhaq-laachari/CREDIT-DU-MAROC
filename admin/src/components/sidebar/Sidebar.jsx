@@ -1,17 +1,12 @@
 import "./sidebar.scss";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
-import StoreIcon from "@mui/icons-material/Store";
 import InsertChartIcon from "@mui/icons-material/InsertChart";
-import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
-import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
+import PaidIcon from '@mui/icons-material/Paid';
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import TimeToLeaveIcon from "@mui/icons-material/TimeToLeave";
+import ContactlessIcon from '@mui/icons-material/Contactless';
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
@@ -42,16 +37,16 @@ const Sidebar = () => {
               <span>Users</span>
             </li>
           </Link>
-          <Link to="/cars" style={{ textDecoration: "none" }}>
+          <Link to="/transactions" style={{ textDecoration: "none" }}>
             <li>
-              <TimeToLeaveIcon className="icon" />
-              <span>Cars</span>
+              <ContactlessIcon className="icon" />
+              <span>Transactions</span>
             </li>
           </Link>
-          <Link to="/orders" style={{ textDecoration: "none" }}>
+          <Link to="/payments" style={{ textDecoration: "none" }}>
             <li>
-              <CreditCardIcon className="icon" />
-              <span>Orders</span>
+              <PaidIcon className="icon" />
+              <span>Payments</span>
             </li>
           </Link>
           <p className="title">USEFUL</p>

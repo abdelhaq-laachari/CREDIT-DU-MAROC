@@ -13,9 +13,9 @@ import "react-toastify/dist/ReactToastify.css";
 import Profile from "./pages/profile/Profile";
 import User from "./pages/single user/User";
 import Users from "./pages/all users/Users";
-import Cars from "./pages/cars/Cars";
-import Orders from "./pages/orders/Orders";
-import Order from "./pages/single order/Order";
+import Payments from "./pages/payments/Payments";
+import Transactions from "./pages/transactions/Transactions";
+import Transaction from "./pages/single transactions/Transaction";
 
 
 function App() {
@@ -42,19 +42,15 @@ function App() {
                   element={<New inputs={userInputs} title="Add New User" />}
                 />
               </Route>
-              <Route path="cars">
-                <Route index element={<Cars />} />
+              <Route path="payments">
+                <Route index element={<Payments />} />
                 <Route path=":productId" element={<Single />} />
-                <Route
-                  path="new"
-                  element={<New inputs={carInputs} title="Add New Car" />}
-                />
               </Route>
-              <Route path="orders">
-                <Route index element={<Orders />} />
+              <Route path="transactions">
+                <Route index element={<Transactions />} />
                 <Route
                   path="single"
-                  element={<Order inputs={orderInputs} title="Order details" />}
+                  element={<Transaction inputs={orderInputs} title="Transaction details" />}
                 />
               </Route>
             </Route>

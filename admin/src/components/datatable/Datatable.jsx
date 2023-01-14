@@ -1,8 +1,7 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { paymentColumns, userColumns, transactionsColumns } from "../../datatablesource";
-import { carAction, orderAction, userAction } from "../../actionTable";
-import { Link } from "react-router-dom";
+import { paymentAction, transactionsAction, userAction } from "../../actionTable";
 
 const Datatable = ({ data, title }) => {
   const path = window.location.pathname.split("/")[1];
@@ -13,10 +12,10 @@ const Datatable = ({ data, title }) => {
     switch (path) {
       case "users":
         return userColumns.concat(userAction);
-      case "cars":
-        return paymentColumns.concat(carAction);
-      case "orders":
-        return transactionsColumns.concat(orderAction);
+      case "payments":
+        return paymentColumns.concat(paymentAction);
+      case "transactions":
+        return transactionsColumns.concat(transactionsAction);
       default:
     }
   };
@@ -25,11 +24,6 @@ const Datatable = ({ data, title }) => {
     <div className="datatable">
       <div className="title">
         <div className="datatableTitle">{title}</div>
-        {path === "cars" ? (
-          <Link to="/cars/new">
-            <button className="addButton">Add New Car</button>
-          </Link>
-        ) : null}
       </div>
       <DataGrid
         className="datagrid"
