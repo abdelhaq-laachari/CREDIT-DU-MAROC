@@ -6,6 +6,7 @@ import { reset, getCard } from "../../features/card/cardSlice";
 import Mcrd from "../../assets/img/mcrd.svg";
 import { useEffect } from "react";
 import Spinner from "../Spinner/Spinner";
+import Cookies from "js-cookie";
 
 const MasterCard = () => {
   const navigate = useNavigate();
@@ -15,15 +16,15 @@ const MasterCard = () => {
   const { card, isSuccess, isError, isLoading, message } = useSelector(
     (state) => state.card
   );
+  const token = Cookies.get("token");
 
   if (isSuccess) {
-    var balance = card.balance;
-    var currency = card.currency;
     var cardNumber = card.cardNumber
       .toString()
       .match(/.{1,4}/g)
       .join(" ");
     var fullName = card.client.firstName + " " + card.client.lastName;
+    var expDate = card.expDate;
   }
 
   useEffect(() => {
@@ -37,7 +38,11 @@ const MasterCard = () => {
     return () => {
       dispatch(reset());
     };
-  }, []);
+  }, [token]);
+
+  if (!token) {
+    return <Spinner />;
+  }
 
   return (
     <div className="text-gray-600">
@@ -102,7 +107,7 @@ const MasterCard = () => {
                 <div className="flex flex-col">
                   <span className="text-xs font-semibold tracking-tight">
                     Valid Thru{" "}
-                    <span className="text-base font-normal">12/24</span>
+                    <span className="text-base font-normal">{expDate}</span>
                   </span>
                   <span className="text-base">Mr. {fullName} </span>
                 </div>

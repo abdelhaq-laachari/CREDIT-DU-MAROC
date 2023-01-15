@@ -20,9 +20,9 @@ const adminSchema = mongoose.Schema(
       required: [true, "Please enter your password"],
     },
   },
-  {
-    timestamp: true,
-  }
+  // {
+  //   timestamps: true,
+  // }
 );
 
 module.exports = mongoose.model("Admin", adminSchema)

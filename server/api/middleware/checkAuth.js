@@ -17,7 +17,6 @@ const checkAuth = (req, res, next) => {
             if (error.name === "TokenExpiredError") {
                 return res.status(401).json({ message: "Token expired" });
             } else {
-                console.error(error);
                 return res.status(401).json({ message: "Unauthorized" });
             }
         }

@@ -10,6 +10,7 @@ import Sidebar from "../../../components/Side bar/Sidebar";
 import Nav from "../../../components/Top nav/Nav";
 import MasterCard from "../../../components/Credit card/MasterCard";
 import Spinner from "../../../components/Spinner/Spinner";
+import Swal from "sweetalert2";
 
 const Transaction = () => {
   const navigate = useNavigate();
@@ -51,7 +52,13 @@ const Transaction = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error(message);
+      Swal.fire({
+        title: "Oops!",
+        text: message,
+        icon: "error",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Okay",
+      });
     }
 
     if (!user) {
@@ -59,8 +66,13 @@ const Transaction = () => {
     }
 
     if (isSuccess) {
-      toast.success(message);
-      // dispatch(reset())
+      Swal.fire({
+        title: "Great!",
+        text: message,
+        icon: "success",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Okay",
+      });
     }
 
     return () => {

@@ -60,7 +60,13 @@ const Transaction = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error(message);
+      Swal.fire({
+        title: "Oops!",
+        text: message,
+        icon: "error",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Okay",
+      });
     }
 
     if (!user) {
@@ -81,15 +87,6 @@ const Transaction = () => {
       confirmButtonText: "Okay",
     });
   }
-  const download = () => {
-    return (
-      <PDFDownloadLink document={<DownloadPdf />} fileName="receipt">
-        {({ loading, error }) =>
-          loading ? "Loading document..." : "Download now!"
-        }
-      </PDFDownloadLink>
-    );
-  };
 
   if (card) {
     var balance = card.balance;

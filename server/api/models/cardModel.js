@@ -4,7 +4,7 @@ const cardSchema = mongoose.Schema(
   {
     client: {
       type: mongoose.Schema.Types.ObjectId,
-      ref:'Client'
+      ref: "Client",
     },
     balance: {
       type: Number,
@@ -12,16 +12,23 @@ const cardSchema = mongoose.Schema(
     },
     currency: {
       type: String,
-      // required: true,
     },
     cardNumber: {
       type: Number,
       required: true,
     },
+    expDate:{
+      type: String,
+      required: true,
+    },
+    bankAccountNumber: {
+      type: Number,
+      required: true,
+    },
   },
-  {
-    timestamp: true,
-  }
+  // {
+  //   timestamps: true,
+  // }
 );
 
 module.exports = mongoose.model("Card", cardSchema);

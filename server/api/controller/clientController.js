@@ -4,7 +4,6 @@ const Card = require("../models/cardModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const generator = require("creditcard-generator");
-const cookieParser = require('cookie-parser');
 
 // @desc    Register a new client
 // @route   POST /client/register
@@ -47,11 +46,13 @@ const registerClient = asyncHandler(async (req, res) => {
       client: client._id,
       balance: 0,
       currency: "MAD",
+      expDate: generateExpirationDate(),
       cardNumber: generator.GenCC().toString(),
+      bankAccountNumber: generateAccountNumber(12),
     });
+
     const token = generateToken(client._id);
     res.status(201).json({ token });
-
   } else {
     res.status(400);
     throw new Error("Invalid user data");
@@ -80,7 +81,7 @@ const loginClient = asyncHandler(async (req, res) => {
     const isMatch = await bcrypt.compare(password, client.password);
     if (isMatch) {
       const token = generateToken(client._id);
-      res.status(201).json({ token });
+      res.json({ token });
     } else {
       res.status(401);
       throw new Error("Invalid email or password");
@@ -142,7 +143,6 @@ const totalClients = asyncHandler(async (req, res) => {
   res.status(200).json(total);
 });
 
-
 // @desc Generate token
 
 const generateToken = (id) => {
@@ -151,6 +151,34 @@ const generateToken = (id) => {
   });
 };
 
+// generate random account number
+
+const generateAccountNumber = (length) => {
+  return Math.floor(
+    Math.pow(10, length - 1) +
+      Math.random() * (Math.pow(10, length) - Math.pow(10, length - 1) - 1)
+  );
+};
+
+// @desc   Generate expiration date
+const generateExpirationDate = () => {
+  // Get the current date and time
+  let now = new Date();
+
+  // Add 4 years to the current date
+  let expirationDate = new Date(
+    now.getFullYear() + 4,
+    now.getMonth(),
+    now.getDate()
+  );
+
+  // Format the expiration date as MM/YY
+  let formattedExpirationDate = expirationDate.toLocaleDateString("en-US", {
+    month: "2-digit",
+    year: "2-digit",
+  });
+  return formattedExpirationDate;
+};
 
 module.exports = {
   registerClient,
@@ -158,5 +186,6 @@ module.exports = {
   singleClient,
   getClients,
   updateClient,
-  totalClients
+  totalClients,
+  generateExpirationDate,
 };

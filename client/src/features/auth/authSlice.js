@@ -4,8 +4,6 @@ import Cookies from 'js-cookie';
 
 // et user from cookies
 const user = Cookies.get('token');
-console.log(user); 
-
 
 const initialState = {
   user: user ? user : null,
@@ -37,6 +35,19 @@ export const register = createAsyncThunk(
 export const logIn = createAsyncThunk("auth/logIn", async (user, thunkAPI) => {
   try {
     return await authService.logIn(user);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+// check auth function
+export const checkAuth = createAsyncThunk("auth/checkAuth", async (_,thunkAPI) => {
+  try {
+    return await authService.checkAuth();
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
@@ -92,6 +103,20 @@ export const authSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.user = null;
+      })
+      .addCase(checkAuth.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(checkAuth.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message = action.payload;
+      })
+      .addCase(checkAuth.rejected, (state, action) => {
+        state.user = null;
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;

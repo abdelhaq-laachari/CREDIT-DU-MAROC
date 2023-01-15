@@ -30,6 +30,7 @@ const Transaction = () => {
   }).format(myDate);
 
   const [amount, setAmount] = useState();
+  const [accountNumber, setAccountNumber] = useState();
   const [payee, setPayee] = useState();
   const [description, setDescription] = useState("");
   const [date, setDate] = useState(newDate);
@@ -39,6 +40,7 @@ const Transaction = () => {
     payee,
     description,
     date,
+    bankAccountNumber: accountNumber,
   };
 
   const getDescription = (e) => {
@@ -53,6 +55,10 @@ const Transaction = () => {
     setPayee(e.target.value);
   };
 
+  const getAccountNumber = (e) => {
+    setAccountNumber(e.target.value);
+  };
+
   const paymentFunction = (e) => {
     e.preventDefault();
     dispatch(makePayment(form));
@@ -60,7 +66,13 @@ const Transaction = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error(message);
+      Swal.fire({
+        title: "Oops!",
+        text: message,
+        icon: "error",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Okay",
+      });
     }
 
     if (!user) {
@@ -74,17 +86,11 @@ const Transaction = () => {
 
   if (isSuccess) {
     Swal.fire({
-      title: "Great!",
+      title: "Success!",
       text: message,
       icon: "success",
-      showCancelButton: true,
       confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Download receipt",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Downloaded!", "Your receipt has been downloaded.", "success");
-      }
+      confirmButtonText: "Okay",
     });
   }
 
@@ -121,7 +127,7 @@ const Transaction = () => {
               <div className="mb-6">
                 <label
                   htmlFor="amount"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-sm font-medium text-gray-900 text-black"
                 >
                   Amount
                 </label>
@@ -129,7 +135,7 @@ const Transaction = () => {
                   type="number"
                   name="amount"
                   id="amount"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="1345 $"
                   required
                   onChange={getAmount}
@@ -137,8 +143,8 @@ const Transaction = () => {
               </div>
               <div className="mb-6">
                 <label
-                  htmlFor="amount"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  htmlFor="benefit"
+                  className="block mb-2 text-sm font-medium text-gray-900 text-black"
                 >
                   Benefit
                 </label>
@@ -146,7 +152,7 @@ const Transaction = () => {
                   type="text"
                   name="benefit"
                   id="benefit"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Mr. John Doe"
                   required
                   onChange={getBenefit}
@@ -154,8 +160,25 @@ const Transaction = () => {
               </div>
               <div className="mb-6">
                 <label
+                  htmlFor="accountNumber"
+                  className="block mb-2 text-sm font-medium text-gray-900 text-black"
+                >
+                  Account Number
+                </label>
+                <input
+                  type="number"
+                  name="accountNumber"
+                  id="accountNumber"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="123456789"
+                  required
+                  onChange={getAccountNumber}
+                />
+              </div>
+              <div className="mb-6">
+                <label
                   htmlFor="desc"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-sm font-medium text-gray-900 text-black"
                 >
                   Description
                 </label>
@@ -163,7 +186,7 @@ const Transaction = () => {
                   type="text"
                   name="description"
                   id="Description"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="By phone online"
                   required
                   onChange={getDescription}

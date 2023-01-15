@@ -3,7 +3,7 @@ const { getBalance } = require("../controller/cardController");
 const router = express.Router(); // Create a router
 
 // Import controllers
-const { registerClient, loginClient, singleClient, updateClient } = require("../controller/clientController");
+const { registerClient, loginClient, singleClient, updateClient, generateExpirationDate } = require("../controller/clientController");
 const { send, myPayments } = require("../controller/paymentController");
 const { myTransactions, deposit, withdraw } = require("../controller/transactionController");
 
@@ -43,5 +43,7 @@ router.route("/card").get(protectClient, getBalance);
 
 // @desc Check token
 router.route("/checkAuth").get(checkAuth);
+
+
 
 module.exports = router;

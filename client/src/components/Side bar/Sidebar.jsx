@@ -7,15 +7,15 @@ import {
 } from "react-icons/ai";
 import { MdOutlinePayments } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
+import Cookies from "js-cookie";
 const App = () => {
   const [open, setOpen] = useState(true);
 
   return (
     <div className="flex bg-[#F3F4F6] drop-shadow-lg">
       <div
-        className={` ${
-          open ? "w-64" : "w-20 "
-        } h-screen p-5  pt-8 relative duration-300`}
+        className={` ${open ? "w-64" : "w-20 "
+          } h-screen p-5  pt-8 relative duration-300`}
       >
         <img
           src={require("../../assets/icons/control.png")}
@@ -31,9 +31,8 @@ const App = () => {
             className="cursor-pointer duration-500 w-12"
           />
           <h1
-            className={`origin-left font-medium text-xl duration-200 ${
-              !open && "hidden"
-            }`}
+            className={`origin-left font-medium text-xl duration-200 ${!open && "hidden"
+              }`}
           >
             Credit du maroc
           </h1>
@@ -71,14 +70,17 @@ const App = () => {
               </span>
             </li>
           </Link>
-          <Link to="/search">
-            <li className="flex mb-2 rounded-md p-2 cursor-pointer hover:bg-gray-600 hover:text-white transition-colors text-base items-center gap-x-4">
-              <AiOutlineLogout />
-              <span className={`${!open && "hidden"} origin-left duration-200`}>
-                Log Out
-              </span>
-            </li>
-          </Link>
+          <li
+            onClick={() => {
+              Cookies.remove('token');
+              window.location.replace("/signin");
+            }}
+            className="flex mb-2 rounded-md p-2 cursor-pointer hover:bg-gray-600 hover:text-white transition-colors text-base items-center gap-x-4">
+            <AiOutlineLogout />
+            <span className={`${!open && "hidden"} origin-left duration-200`}>
+              Log Out
+            </span>
+          </li>
         </ul>
       </div>
     </div>

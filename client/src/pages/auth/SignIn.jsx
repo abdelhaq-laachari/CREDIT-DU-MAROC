@@ -66,10 +66,11 @@ export default function SignInSide() {
     }
     // if user logged in redirect him to home
     if (isSuccess) {
-      navigate("/dashboard");
+      window.location = "/dashboard";
+
+      dispatch(reset());
     }
     // we need to reset everything
-    dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const validate = (values) => {

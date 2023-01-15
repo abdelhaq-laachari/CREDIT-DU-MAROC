@@ -19,18 +19,28 @@ const logIn = async (userData) => {
       expires: 1,
     });
   }
-  return response.data;
+  return response.data.token;
 };
+
+// check auth function
+const checkAuth = async () => {
+  const res = await axios.get('/client/checkAuth');
+  if (res.status === 201 && res.data.message === "authorized") {
+    return res.data.message;
+  }
+};
+
+
 
 // Logout user
 const logout = () => {
-  // localStorage.removeItem("user");
-  localStorage.clear()
+  Cookies.remove('token');
 };
 
 const authService = {
   register,
   logIn,
+  checkAuth,
   logout,
 };
 

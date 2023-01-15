@@ -54,7 +54,7 @@ export default function SignUp() {
     }
     // if user logged in redirect him to home
     if (isSuccess) {
-      navigate("/dashboard");
+      window.location = "/dashboard";
     }
     // we need to reset everything
     dispatch(reset());
