@@ -4,7 +4,12 @@ import Register from "./pages/register/Register";
 import Single from "./components/single/Single";
 import New from "./pages/new/New";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { carInputs, orderInputs, productInputs, userInputs } from "./formSource";
+import {
+  carInputs,
+  orderInputs,
+  productInputs,
+  userInputs,
+} from "./formSource";
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
@@ -16,11 +21,12 @@ import Users from "./pages/all users/Users";
 import Payments from "./pages/payments/Payments";
 import Transactions from "./pages/transactions/Transactions";
 import Transaction from "./pages/single transactions/Transaction";
-
+// import ProtectedRoute from "./protectedRoute";
+import ProtectedRoute from "./Protect";
+import Error from "./pages/error/Error";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
-  const token = localStorage.getItem("accessToken");
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
@@ -28,9 +34,7 @@ function App() {
         <Routes>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-        </Routes>
-        {token ? (
-          <Routes>
+          <Route element={<ProtectedRoute />}>
             <Route path="/">
               <Route index element={<Home />} />
               <Route path="profile" element={<Profile />} />
@@ -50,15 +54,18 @@ function App() {
                 <Route index element={<Transactions />} />
                 <Route
                   path="single"
-                  element={<Transaction inputs={orderInputs} title="Transaction details" />}
+                  element={
+                    <Transaction
+                      inputs={orderInputs}
+                      title="Transaction details"
+                    />
+                  }
                 />
               </Route>
             </Route>
-          </Routes>
-        ) : (
-          window.location.pathname !== "/login" && <Login /> &&
-          window.location.pathname !== "/register" && <Register />
-        )}
+          </Route>
+          <Route path="*" element={<Error />} />
+        </Routes>
       </BrowserRouter>
       <ToastContainer position="top-right" autoClose={2000} />
     </div>

@@ -16,18 +16,32 @@ const Home = () => {
 
   useEffect(() => {
     const totalTransactions = async () => {
-      const res = await axios.get("admin/totalTransactions", config);
-      setTransactions(res.data);
+      try {
+        const res = await axios.get("admin/totalTransactions", config);
+        setTransactions(res.data);
+      } catch (error) {
+        return error.response.data.message;
+      }
     };
 
     const totalPayments = async () => {
-      const res = await axios.get("admin/totalPayments", config);
-      setPayment(res.data);
+      try {
+        const res = await axios.get("admin/totalPayments", config);
+        setPayment(res.data);
+      }
+      catch (error) {
+        return error.response.data.message;
+      }
     };
 
     const totalClient = async () => {
-      const res = await axios.get("admin/totalClients", config);
-      setClient(res.data);
+      try {
+        const res = await axios.get("admin/totalClients", config);
+        setClient(res.data);
+      }
+      catch (error) {
+        return error.response.data.message;
+      }
     };
 
     totalTransactions();

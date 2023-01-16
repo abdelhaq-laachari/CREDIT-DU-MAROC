@@ -63,7 +63,6 @@ const Transaction = () => {
   const paymentFunction = (e) => {
     e.preventDefault();
     dispatch(makeWithdrawal(form));
-    console.log(form);
   };
 
   useEffect(() => {

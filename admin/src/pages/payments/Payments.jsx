@@ -14,7 +14,6 @@ const Cars = () => {
     axios
       .get("admin/payments", config)
       .then((res) => {
-        console.log(res.data);
         setData(res.data);
       });
   }, []);

@@ -1,4 +1,7 @@
-export const token = localStorage.getItem("accessToken");
+// export const token = localStorage.getItem("accessToken");
+import Cookies from "js-cookie";
+
+export const token = Cookies.get("token");
 
 export const config = {
     headers: {

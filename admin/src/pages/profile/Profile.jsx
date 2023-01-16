@@ -14,7 +14,6 @@ const Profile = () => {
       const res = await axios.get("/admin/profile", config);
       //   data.push(res.data); 
       setData(res.data);
-      console.log(data);
     };
     getAdmin();
   }, []);

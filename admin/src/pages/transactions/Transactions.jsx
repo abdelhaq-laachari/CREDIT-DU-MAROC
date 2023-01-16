@@ -13,7 +13,6 @@ const Transactions = () => {
     axios
       .get("admin/transactions", config)
       .then((res) => {
-        console.log(res.data);
         setData(res.data);
       });
   }, []);

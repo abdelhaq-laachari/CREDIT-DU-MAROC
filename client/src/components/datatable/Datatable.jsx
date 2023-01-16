@@ -6,7 +6,6 @@ import {downloadAction} from "../../actionTable"
 
 const Datatable = ({ data, title }) => {
   const path = window.location.pathname.split("/")[2];
-  console.log(path);
 
   // add switch statement to handle different paths
   const switchFunction = () => {

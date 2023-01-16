@@ -91,7 +91,6 @@ const Transaction = () => {
     }
   };
   
-  console.log(description);
   useEffect(() => {
     if (isError) {
       Swal.fire({

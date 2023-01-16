@@ -12,6 +12,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 
 function Copyright(props) {
   return (
@@ -49,11 +50,9 @@ export default function SignIn() {
     if (email && password) {
       try {
         const res = await axios.post("admin/login", formData);
-        console.log(res.data);
-        localStorage.setItem("accessToken", res.data.token);
+        Cookies.set("token", res.data.token);
         window.location.href = "/";
       } catch (error) {
-        console.log(error);
         if (error.response.status === 401) {
           toast.error(error.response.data.message);
         }

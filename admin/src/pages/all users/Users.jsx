@@ -14,7 +14,6 @@ const Users = () => {
     axios
       .get("admin/clients", config)
       .then((res) => {
-        console.log(res.data);
         setData(res.data);
       });
   }, []);

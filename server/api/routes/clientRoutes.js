@@ -9,7 +9,7 @@ const { myTransactions, deposit, withdraw } = require("../controller/transaction
 
 // Import middleware
 const { protectClient } = require("../middleware/clientMiddleware");
-const { checkAuth } = require("../middleware/checkAuth");
+const { checkClient } = require("../middleware/checkAuth");
 
 // @desc    Register a new client
 router.route("/register").post(registerClient);
@@ -42,7 +42,7 @@ router.route("/makePayment").post(protectClient, send);
 router.route("/card").get(protectClient, getBalance);
 
 // @desc Check token
-router.route("/checkAuth").get(checkAuth);
+router.route("/checkAuth").get(checkClient);
 
 
 

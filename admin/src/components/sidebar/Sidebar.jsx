@@ -10,6 +10,7 @@ import ContactlessIcon from '@mui/icons-material/Contactless';
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
+import Cookies from "js-cookie";
 
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
@@ -67,7 +68,7 @@ const Sidebar = () => {
           </Link>
           <li
             onClick={() => {
-              localStorage.clear();
+              Cookies.remove("token");
               window.location.replace("/login");
             }}
           >

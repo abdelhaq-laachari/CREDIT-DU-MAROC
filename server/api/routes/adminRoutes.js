@@ -5,6 +5,7 @@ const { getClients, singleClient, totalClients } = require("../controller/client
 const { allPayments, totalPayments } = require("../controller/paymentController");
 const { getTransactions, totalTransactions } = require("../controller/transactionController");
 const { protect } = require("../middleware/authMiddleware");
+const { checkAdmin } = require("../middleware/checkAuth");
 
 // @desc    Register a new admin
 router.route("/register").post(registerAdmin);
@@ -36,7 +37,8 @@ router.route("/totalPayments").get(protect, totalPayments);
 // @desc    Get total transactions
 router.route("/totalTransactions").get(protect, totalTransactions);
 
-
+// @desc    Check admin
+router.route("/checkAuth").get(checkAdmin);
 
 
 
