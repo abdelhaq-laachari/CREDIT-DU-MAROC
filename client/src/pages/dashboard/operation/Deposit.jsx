@@ -5,16 +5,18 @@ import {
   reset,
   makeDeposit,
 } from "../../../features/transaction/transactionSlice";
-import { toast } from "react-toastify";
 import Sidebar from "../../../components/Side bar/Sidebar";
 import Nav from "../../../components/Top nav/Nav";
 import MasterCard from "../../../components/Credit card/MasterCard";
 import Spinner from "../../../components/Spinner/Spinner";
 import Swal from "sweetalert2";
-import { PDFDownloadLink } from "@react-pdf/renderer";
-import DownloadPdf from "../../../components/PDF/DownloadPdf";
+import { toast } from "react-toastify";
 
 const Transaction = () => {
+  const [formErrors, setFormErrors] = useState({
+    amount: "",
+    description: "",
+  });
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -45,19 +47,51 @@ const Transaction = () => {
   };
 
   const getDescription = (e) => {
-    setDescription(e.target.value);
+    if (e.target.value === "") {
+      setFormErrors({
+        description: "This field is required",
+      });
+    } else {
+      setFormErrors({
+        description: "",
+      });
+      setDescription(e.target.value);
+    }
   };
 
   const getAmount = (e) => {
-    setAmount(parseFloat(e.target.value));
+    // check if the amount input is empty or not
+    if (e.target.value === "") {
+      setFormErrors({
+        amount: "This field is required",
+      });
+    }
+    // check if the amount is a number or not
+    else if (isNaN(e.target.value) || e.target.value <= 0) {
+      setFormErrors({
+        amount: "Please enter a valid amount",
+      });
+    } else {
+      setFormErrors({
+        amount: "",
+      });
+      setAmount(parseFloat(e.target.value));
+    }
   };
 
   const paymentFunction = (e) => {
     e.preventDefault();
-    dispatch(makeDeposit(form));
-    console.log(form);
+    if (amount || description) {
+      dispatch(makeDeposit(form));
+    } else {
+      setFormErrors({
+        amount: "This field is required",
+        description: "This field is required",
+      });
+    }
   };
-
+  
+  console.log(description);
   useEffect(() => {
     if (isError) {
       Swal.fire({
@@ -125,14 +159,24 @@ const Transaction = () => {
                   Amount
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   name="amount"
                   id="amount"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  // className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  {...((formErrors.amount && {
+                    className:
+                      "bg-red-100 border border-red-300 text-red-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                  }) || {
+                    className:
+                      "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                  })}
                   placeholder="1345 $"
-                  required
+                  // required
                   onChange={getAmount}
                 />
+                {formErrors.amount && (
+                  <p className="text-red-500 text-sm">{formErrors.amount}</p>
+                )}
               </div>
               <div className="mb-6">
                 <label
@@ -145,11 +189,21 @@ const Transaction = () => {
                   type="text"
                   name="description"
                   id="Description"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  // className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  {...((formErrors.description && {
+                    className:
+                      "bg-red-100 border border-red-300 text-red-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                  }) || {
+                    className:
+                      "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                  })}
                   placeholder="Deposit"
-                  required
+                  // required
                   onChange={getDescription}
                 />
+                {formErrors.description && (
+                  <p className="text-red-500 text-sm">{formErrors.description}</p>
+                )}
               </div>
               <button
                 type="submit"

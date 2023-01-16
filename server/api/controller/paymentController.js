@@ -2,7 +2,6 @@ const Payment = require("../models/paymentModel");
 const Card = require("../models/cardModel");
 const asyncHandler = require("express-async-handler");
 
-
 // @desc    Send money
 // @route   POST /client/payment
 // @access  Private
@@ -17,28 +16,34 @@ const send = asyncHandler(async (req, res) => {
     description,
     payee,
   });
-  const createdPayment = await payment.save();
   const findUser = await Card.findOne({ bankAccountNumber });
   if (findUser) {
-    const balance = await Card.findOne({ client: clientId });
-    if (balance.balance < amount) {
-      res.status(400).json({
-        message: `You have insufficient funds to send ${amount}. Your current account balance is ${balance.balance}. Please deposit more funds to your account.`,
-      });
+    if (findUser.bankAccountNumber != bankAccountNumber) {
+      const balance = await Card.findOne({ client: clientId });
+      if (balance.balance < amount) {
+        res.status(400).json({
+          message: `You have insufficient funds to send ${amount}. Your current account balance is ${balance.balance}. Please deposit more funds to your account.`,
+        });
+      } else {
+        const createdPayment = await payment.save();
+        const newBalance = balance.balance - amount;
+        findUser.balance = findUser.balance + amount;
+        await findUser.save();
+        balance.balance = newBalance;
+        await balance.save();
+        res.status(201).json({
+          message: `Thank you for your payment of ${amount} to ${payee}. Your current account balance is ${newBalance}. Please keep your transaction receipt for your records.`,
+        });
+      }
     } else {
-      const newBalance = balance.balance - amount;
-      findUser.balance = findUser.balance + amount;
-      await findUser.save();
-      balance.balance = newBalance;
-      await balance.save();
-      res.status(201).json({
-        message: `Thank you for your payment of ${amount} to ${payee}. Your current account balance is ${newBalance}. Please keep your transaction receipt for your records.`,
+      res.status(404).json({
+        message: "You cannot send money to yourself",
       });
     }
   } else {
-    res
-      .status(404)
-      .json({ message: "There is no user with this account number" });
+    res.status(400).json({
+      message: "There is no user with this account number",
+    });
   }
 });
 

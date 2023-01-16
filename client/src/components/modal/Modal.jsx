@@ -31,7 +31,7 @@ function Modal({ setOpenModal }) {
           <button
             id="withdraw"
             onClick={() => {
-              navigate("deposit");
+              navigate("withdraw");
             }}
           >
             {" "}

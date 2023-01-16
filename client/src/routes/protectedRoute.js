@@ -9,7 +9,7 @@ import Cookies from 'js-cookie';
 const Protect = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { isLoading, isError, isSuccess, message } = useSelector(state => state.auth);
+    const { isLoading, isError, isSuccess } = useSelector(state => state.auth);
     const token = Cookies.get('token');
     useEffect(() => {
         dispatch(checkAuth());

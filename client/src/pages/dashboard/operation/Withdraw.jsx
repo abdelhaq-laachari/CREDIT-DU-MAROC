@@ -5,7 +5,6 @@ import {
   reset,
   makeWithdrawal,
 } from "../../../features/transaction/transactionSlice";
-import { toast } from "react-toastify";
 import Sidebar from "../../../components/Side bar/Sidebar";
 import Nav from "../../../components/Top nav/Nav";
 import MasterCard from "../../../components/Credit card/MasterCard";
@@ -15,6 +14,9 @@ import Swal from "sweetalert2";
 const Transaction = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [formErrors, setFormErrors] = useState({
+    amount: "",
+  });
 
   const { user } = useSelector((state) => state.auth);
   const { isLoading, isError, isSuccess, message } = useSelector(
@@ -32,16 +34,30 @@ const Transaction = () => {
     second: "2-digit",
   }).format(date);
 
-  const [form, setForm] = useState({
-    amount: "",
-    description: "",
-    date: newDate,
-  });
+  const [amount, setAmount] = useState();
+  const [description, setDescription] = useState("");
 
-  const { amount, description } = form;
+  const form = {
+    amount,
+    description,
+    date,
+  };
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const getDescription = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const getAmount = (e) => {
+    if (isNaN(e.target.value)) {
+      setFormErrors({
+        amount: "Please enter a valid amount",
+      });
+    } else {
+      setFormErrors({
+        amount: "",
+      });
+      setAmount(parseFloat(e.target.value));
+    }
   };
 
   const paymentFunction = (e) => {
@@ -117,14 +133,24 @@ const Transaction = () => {
                   Amount
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   name="amount"
                   id="amount"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  // className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  {...((formErrors.amount && {
+                    className:
+                      "bg-red-100 border border-red-300 text-red-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                  }) || {
+                    className:
+                      "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                  })}
                   placeholder="1345 $"
                   required
-                  onChange={handleChange}
+                  onChange={getAmount}
                 />
+                {formErrors.amount && (
+                  <p className="text-red-500 text-sm">{formErrors.amount}</p>
+                )}
               </div>
               <div className="mb-6">
                 <label
@@ -140,7 +166,7 @@ const Transaction = () => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Deposit"
                   required
-                  onChange={handleChange}
+                  onChange={getDescription}
                 />
               </div>
               <button

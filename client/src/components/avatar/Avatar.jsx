@@ -8,6 +8,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
+import Cookies from 'js-cookie';
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -75,8 +76,8 @@ export default function AccountMenu() {
         <Divider />
         <MenuItem
           onClick={() => {
-            localStorage.clear();
-            window.location.href = "/login";
+            Cookies.remove("token");
+            window.location.href = "/signin";
           }}
         >
           <ListItemIcon>

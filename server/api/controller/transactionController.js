@@ -53,13 +53,13 @@ const withdraw = asyncHandler(async (req, res) => {
     description,
     type: "withdraw",
   });
-  const createdTransaction = await transaction.save();
   const balance = await Card.findOne({ client: clientId });
   if (balance.balance < amount) {
     res.status(400).json({
       message: `You have insufficient funds to withdraw ${amount} MAD. Your current account balance is ${balance.balance} MAD. Please deposit more funds to your account.`,
     });
   } else {
+    const createdTransaction = await transaction.save();
     const newBalance = balance.balance - amount;
     balance.balance = newBalance;
     await balance.save();
@@ -74,10 +74,12 @@ const withdraw = asyncHandler(async (req, res) => {
 // @access  Private
 
 const getTransactions = asyncHandler(async (req, res) => {
-  const transactions = await Transaction.find({}).populate("client", "firstName lastName");
+  const transactions = await Transaction.find({}).populate(
+    "client",
+    "firstName lastName"
+  );
   res.send(transactions);
 });
-
 
 // @desc    Get total transactions
 // @route   GET /admin/totalTransactions
