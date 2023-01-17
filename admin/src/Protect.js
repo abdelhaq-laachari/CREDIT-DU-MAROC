@@ -32,7 +32,7 @@ const Protect = () => {
         } else {
           setIsLoading(false);
           setIsSuccess(false);
-          // setIsError(true);
+          setIsError(true);
           setMessage(res.data);
           return res.data;
         }
@@ -40,7 +40,6 @@ const Protect = () => {
         setIsLoading(false);
         setIsSuccess(false);
         setIsError(true);
-        setMessage(error);
         return error.response.data;
       }
     };

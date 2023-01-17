@@ -80,8 +80,9 @@ export default function SignUp() {
     };
 
     setFormErrors(validate(formData));
-
-    dispatch(register(formData));
+    if (email && password && firstName && lastName && phoneNumber && age ) {
+      dispatch(register(formData));
+    }
   };
 
   const validate = (values) => {

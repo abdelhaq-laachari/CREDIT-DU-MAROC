@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node api/server.js ",
-    "server": "nodemon api/server.js"
+    "server": "nodemon api/server.js",
+    "test": "jest"
   },
   "author": "Godfather",
   "license": "MIT",
@@ -22,6 +23,7 @@
     "express-async-handler": "^1.2.0",
     "fs": "^0.0.1-security",
     "handlebars": "^4.7.7",
+    "jest": "^29.3.1",
     "js-cookie": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.2",

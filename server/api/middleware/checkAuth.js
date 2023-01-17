@@ -33,18 +33,18 @@ const checkAdmin = async (req, res, next) => {
   const token = req.cookies.token;
   //   const token = req.headers.authorization.split(" ")[1];
   if (!token) {
-    return res.status(401).json({ message: "Unauthorized" });
+    return res.status(401).json({ message: "Unauthorized ff" });
   } else {
     try {
       //verify token
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       // Get admin by id
-      const user = decoded;
-      const findAdmin = await Admin.findById(user.id);
+      req.user = decoded;
+      const findAdmin = await Admin.findById(decoded.id);
       if (findAdmin) {
         return res.status(201).json({ message: "authorized" });
       } else {
-        return res.status(401).json({ message: "Unauthorized" });
+        return res.status(401).json({ message: "Unauthorized ss" });
       }
     } 
     catch (error) {
@@ -52,7 +52,7 @@ const checkAdmin = async (req, res, next) => {
         return res.status(401).json({ message: "Token expired" });
       } 
       else {
-        return res.status(401).json({ message: "Unauthorized" });
+        return res.status(401).json({ message: "Unauthorized dd" });
       }
     }
   }

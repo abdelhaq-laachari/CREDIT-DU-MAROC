@@ -92,6 +92,7 @@ nav {
 
   header .responsive_nav {
     transform: none;
+    background-color: #fff;
   }
 
   nav .nav-close-btn {

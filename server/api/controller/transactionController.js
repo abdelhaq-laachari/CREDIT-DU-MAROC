@@ -1,6 +1,7 @@
 const Transaction = require("../models/transactionModel");
 const Card = require("../models/cardModel");
 const asyncHandler = require("express-async-handler");
+const Client = require("../models/clientModel");
 
 // @desc    Get all client transactions
 // @route   GET /client/transactions
@@ -38,6 +39,7 @@ const deposit = asyncHandler(async (req, res) => {
     message: `Thank you for your deposit of ${amount} MAD. Your current account balance is ${newBalance} MAD. Please keep your transaction receipt for your records.`,
   });
 });
+
 
 // @desc    Withdraw money
 // @route   POST /client/withdraw

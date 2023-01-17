@@ -49,7 +49,7 @@ export default function SignIn() {
     setFormErrors(validate(formData));
     if (email && password) {
       try {
-        const res = await axios.post("admin/login", formData);
+        const res = await axios.post("/admin/login", formData);
         Cookies.set("token", res.data.token);
         window.location.href = "/";
       } catch (error) {
